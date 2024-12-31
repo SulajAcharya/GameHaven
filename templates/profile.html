@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ username }}'s Profile</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+    
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    
+        .profile-info {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+        }
+    
+        .profile-banner {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+    
+        .profile-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 20px;
+            margin-top: -225px; /* Ensures 75% of the profile pic overlaps the banner */
+        }
+    
+        .profile-pic {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    
+        .username {
+            font-size: 50px;
+            font-weight: bold;
+            color: #4CAF50;
+            padding: 20px;
+        }
+    
+        .details {
+            font-size: 16px;
+            color: #555;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+    
+        .details p {
+            margin: 0;
+        }
+    
+        .details p strong {
+            color: #333;
+        }
+    
+        .actions {
+            margin-top: 20px;
+            text-align: center;
+        }
+    
+        .actions a {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 0 5px;
+        }
+    
+        .actions a:hover {
+            background-color: #45a049;
+        }
+    
+        .edit-details {
+            background-color: #ff9800;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    
+        .edit-details:hover {
+            background-color: #e68900;
+        }
+    </style>
+    
+    
+</head>
+<body>
+
+    <div class="container">
+        <div class="profile-info">
+            <!-- Profile Banner -->
+            <img src="{{ url_for('static', filename='profile_pics/' + profile_pic.split('/')[-1]) }}" alt="Profile Banner" class="profile-banner">
+    
+            <!-- Profile Row: Profile Picture and Username -->
+            <div class="profile-row">
+                <!-- Profile Picture -->
+                <img src="{{ url_for('static', filename='profile_pics/' + profile_pic.split('/')[-1]) }}" alt="Profile Picture" class="profile-pic">
+                
+                <!-- Username -->
+                <span class="username">@{{ username }}</span>
+            </div>
+        </div>
+    
+        <div class="details">
+            <p><strong>Full Name:</strong> {{ full_name if full_name else 'Not provided' }}</p>
+            <p><strong>Email:</strong> {{ email if email else 'Not provided' }}</p>
+            <p><strong>Phone Number:</strong> {{ phone if phone else 'Not provided' }}</p>
+            <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
+            <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
+            <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
+            <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
+            <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
+            <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
+            <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
+        </div>
+    
+        <div class="actions">
+            <a href="{{ url_for('index') }}">Go to Home</a>
+            <a href="{{ url_for('logout') }}" style="background-color: #f44336;">Logout</a>
+        </div>
+    
+    </div>
+    
+</body>
+</html>

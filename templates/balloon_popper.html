@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balloon Popper Game</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Styling for the body */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+        }
+
+        /* Styling for the main game container */
+        .game-container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Styling for score and time display */
+        .score, .time {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        /* Styling for the balloon container */
+        #balloons {
+            position: relative;
+            height: 350px;
+            width: 700px;
+            background-color: #e0f7fa;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        /* Styling for each balloon */
+        .balloon {
+            position: absolute;
+            width: 60px;  
+            height: 60px;
+            border-radius: 7px 40px 20px;
+            rotate: -135deg; /* This is an unused property */
+            cursor: pointer;
+            pointer-events: auto; /* Ensure the click events are captured */
+            animation: float 5s ease-in-out infinite; /* Animation for balloon movement */
+            border: 1px solid #000; /* Add a white border */
+        }
+
+        /* Keyframes for the floating effect (animation for balloons) */
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(20deg); /* Start from the initial position */
+            }
+            100% {
+                transform: translate(350px, 350px) rotate(-50deg); /* Move the balloon to a different position */
+            }
+        }
+
+        /* Styling for the start button */
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Hover effect for the button */
+        button:hover {
+            background-color: #3700b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>balloon Popper</h1>
+        
+        <!-- Displaying score, time, and top score -->
+        <div style="display: flex; justify-content: space-between; margin: 0px 20px;">
+          <div class="score">
+              <p>Score: <span id="score">0</span></p>
+          </div>
+          <div class="time">
+              <p>Time Left: <span id="timeLeft">30</span> seconds</p>
+          </div>
+          <div class="top-score">
+            <p>Top Score: <span id="top-score">0</span></p>
+          </div>
+        </div>
+
+        <!-- Container for the balloons -->
+        <div id="balloons"></div>
+        
+        <!-- Start button to begin/restart the game -->
+        <button id="startBtn">Start Game</button>
+    </div>
+
+    <script>
+    // Initial game variables
+        let score = 0;
+        let timeLeft = 30;
+        let gameInterval;
+        let balloonInterval;
+        let isGameActive = false;
+
+        // DOM elements
+        const scoreElement = document.getElementById("score");
+        const timeElement = document.getElementById("timeLeft");
+        const topScoreElement = document.getElementById("top-score");
+        const balloonsContainer = document.getElementById("balloons");
+        const startBtn = document.getElementById("startBtn");
+
+        // Array of vibrant balloon colors
+        const balloonColors = ['#FF000D', '#FE0002', '#FF85FF', '#FF028D', '#AD0AFD', '#BC13FE', '#0165FC', '#41FDFE', '#FF7124', '#FFCF00','#21FC0D', '#00FF00', '#FFF700', '#FFFF00', '#9F2B68', '#C46210'];
+
+        // Get the top score from localStorage (if available)
+        let topScore = localStorage.getItem("topScore") || 0;
+        topScoreElement.textContent = topScore;
+
+        // Event listener to start the game when the button is clicked
+        startBtn.addEventListener("click", startGame);
+
+        // Start the game function
+        function startGame() {
+            if (isGameActive) return; // Prevent starting a new game if one is active
+
+            isGameActive = true;
+            score = 0;
+            timeLeft = 30;
+            scoreElement.textContent = score;
+            timeElement.textContent = timeLeft;
+
+            // Start the timer
+            gameInterval = setInterval(updateTime, 1000);
+
+            // Start creating balloons more frequently (every 700ms)
+            balloonInterval = setInterval(createballoon, 700);
+        }
+
+        // Update the time left during the game
+        function updateTime() {
+            timeLeft--;
+            timeElement.textContent = timeLeft;
+
+            // End the game when the time reaches 0
+            if (timeLeft <= 0) {
+                endGame();
+            }
+        }
+
+        // Create a balloon with random properties (position, color, etc.)
+        function createballoon() {
+            const balloon = document.createElement("div");
+            balloon.classList.add("balloon");
+
+            // Randomize balloon position within the container (bottom 30% to 100% from top)
+            const randomX = Math.floor(Math.random() * (balloonsContainer.offsetWidth - 50)); // Horizontal position
+            const randomY = Math.floor(Math.random() * (balloonsContainer.offsetHeight * 0.7)) + (balloonsContainer.offsetHeight * 0.3); // Vertical position (30% to 100% from top)
+            const randomColor = balloonColors[Math.floor(Math.random() * balloonColors.length)]; // Random color
+            const randomTime = Math.random() * 3 + 2; // Random time to disappear (2-5 seconds)
+
+            // Apply the randomized values to the balloon's style
+            balloon.style.left = `${randomX}px`;
+            balloon.style.top = `${randomY}px`; // Apply random vertical position
+            balloon.style.backgroundColor = randomColor; // Apply random color
+
+            // Randomly add an event listener for popping the balloon
+            balloon.addEventListener("click", popballoon);
+
+            // Append the created balloon to the container
+            balloonsContainer.appendChild(balloon);
+
+            // Remove the balloon after the animation time (to make sure it disappears)
+            setTimeout(() => {
+                balloon.remove();
+            }, randomTime * 1000);
+        }
+
+        // Pop the balloon when clicked
+        function popballoon(event) {
+            // Stop the balloon's animation immediately
+            event.target.style.animation = 'none';  // Stops animation
+            event.target.remove(); // Remove the balloon from DOM
+
+            // Increase the score and update the score display
+            score++;
+            scoreElement.textContent = score;
+        }
+
+        // End the game and show the results
+        function endGame() {
+            clearInterval(gameInterval); // Clear the timer interval
+            clearInterval(balloonInterval); // Clear the balloon creation interval
+
+            // Check if the current score is higher than the stored top score
+            if (score > topScore) {
+                topScore = score;
+                localStorage.setItem("topScore", topScore); // Update top score in localStorage
+            }
+
+            // Display the updated top score
+            topScoreElement.textContent = topScore;
+
+            // Alert the player with their score
+            alert(`Game Over! Your score: ${score}. Top Score: ${topScore}`);
+            isGameActive = false;
+            startBtn.textContent = "Restart Game"; // Change the button text for restarting
+        }
+    </script>
+</body>
+</html>

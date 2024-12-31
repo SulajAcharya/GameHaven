@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #111;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: space-between; /* Evenly space the containers horizontally */
+            align-items: center; /* Vertically center all child containers */
+            width: 100%; /* Ensure it takes up the full available width */
+            max-width: 1200px; /* Optional: Constrain the max width for better design */
+            gap: 20px; /* Add some spacing between the containers */
+            height: 100%; /* Allow the main container to take up available height */
+        }
+
+
+        /* Ensure all containers inside are equal height */
+        .main-container > div {
+            flex: 1; /* Each child takes up equal width */
+            display: flex;
+            flex-direction: column; /* Maintain inner content stacking naturally */
+            background-color: #222; /* Optional: Ensure containers are visually distinct */
+            border: 1px solid #444; /* Optional: Light border for separation */
+            padding: 15px; /* Optional: Add padding for better layout */
+            border-radius: 8px; /* Optional: Rounded corners for aesthetic */
+        }
+
+
+        #tetrisGrid {
+            display: grid;
+            grid-template-columns: repeat(20, 20px);
+            grid-template-rows: repeat(27, 20px);
+            gap: 0;
+            border: 1px solid white;
+        }
+
+        .cell {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #222; /* Add a border to simulate separation */
+            background-color: #111; /* Match the background */
+        }
+
+        .block {
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        .box1 { background: linear-gradient(45deg, #00c9ff, #92fe9d); }
+        .box2 { background: linear-gradient(45deg, #6a11cb, #2575fc); }
+        .box3 { background: linear-gradient(45deg, #f7971e, #ffd200); } /* New T shape color */
+        .box4 { background: linear-gradient(45deg, #ff6a00, #ee0979); }
+        .box5 { background: linear-gradient(45deg, #00b09b, #96c93d); }
+        .box6 { background: linear-gradient(45deg, #8e2de2, #4a00e0); } /* L shape color */
+        .box7 { background: linear-gradient(45deg, #36d1dc, #5b86e5); } /* J shape color */
+        .box8 { background: linear-gradient(45deg, #ff9a9e, #fad0c4); }
+        .box9 { background: linear-gradient(45deg, #ff5f6d, #ffc371); }
+        .box10 { background: linear-gradient(45deg, #00c9ff, #92fe9d); }
+        .box11 { background: linear-gradient(45deg, #ff4e50, #f9d423); }
+        .box12 { background: linear-gradient(45deg, #c94b4b, #4b134f); } /* Wine Red and Purple */
+        .box13 { background: linear-gradient(45deg, #16a085, #f4d03f); } /* Tropical Gold and Teal */
+        .box14 { background: linear-gradient(45deg, #1f4037, #99f2c8); } /* Emerald Forest */
+
+        #startButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #444;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #startButton:hover {
+            background-color: #666;
+        }
+
+        #scoreBoard {
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+            font-size: 18px;
+        }
+
+        #scoreBoard p {
+            margin: 5px 0;
+        }
+
+        /* Simple CSS for Rules Container */
+        .rules-container {
+            display: flex;
+            background-color: #333;
+            padding: 10px;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: left;
+            border-radius: 8px; /* Rounded corners */
+            border: 1px solid #444; /* Light border */
+            height: 100%;
+        }
+
+        /* Heading Style for Rules */
+        .rules-container h2 {
+            font-size: 22px;
+            color: #f9c74f; /* Soft Yellow color */
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* Paragraph Style */
+        .rules-container p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 5px;
+        }
+
+        /* Unordered list style for steps/rules */
+        .rules-container ul {
+            padding-left: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* List item style */
+        .rules-container li {
+            margin-bottom: 5px;
+        }
+
+        /* Highlighting important rules */
+        .rules-container strong {
+            color: #f9c74f; /* Same yellow for emphasis */
+        }
+
+        .next-shape {
+            margin-bottom: 20px;
+            text-align: center;
+            background-color: #444;
+            padding: 10px;
+            border-radius: 8px;
+            width:fit-content;
+        }
+
+        .next-shape h3 {
+            color: #f9c74f;
+            font-size: 16px;
+        }
+
+        #nextShapeGrid {
+            display: grid;
+            grid-template-columns: repeat(5, 20px);
+            grid-template-rows: repeat(5, 20px);
+            gap: 0;
+            border: 1px solid white;
+            width: 100px;
+            height: 100px;
+        }
+
+        .user-ack {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    width: 100%;
+    height: 100%; /* Optional: Ensure it fills the available height */
+}
+
+        
+
+    </style>
+</head>
+<body>
+    <h1>Tetris Game</h1>
+    <div class="main-container">
+        <div class="rules-container">
+            <h2>Game Rules: Let the Tetris Begin!</h2>
+            <div>
+                <p>Welcome to Tetris! 🧩 Your goal is to clear lines by arranging falling blocks. The faster and smarter you play, the higher your score!</p>
+                <ul>
+                    <li><strong>Mission:</strong> Arrange falling blocks to clear lines. The more you clear, the higher your score!</li>
+                    <li><strong>Controls:</strong> Use <strong>arrow keys</strong> to move, rotate, and speed up blocks:</li>
+                    <li><strong>Left Arrow:</strong> Move left.</li>
+                    <li><strong>Right Arrow:</strong> Move right.</li>
+                    <li><strong>Down Arrow:</strong> Speed up the fall.</li>
+                    <li><strong>Up Arrow:</strong> Rotate the block.</li>
+                    <li><strong>Game Over:</strong> If blocks reach the top, it's game over!</li>
+                    <li><strong>Scoring:</strong> 15 points for each line cleared. More lines = more points!</li>
+                </ul>
+            </div>
+        </div>
+    
+        <div id="gameContainer">
+            <div>
+                <div id="tetrisGrid"></div>
+            </div>
+        </div>
+
+        <div class="user-ack">
+            <div class="next-shape">
+                <h3>Next Shape:</h3>
+                <div id="nextShapeGrid"></div>
+            </div>
+            
+            <div id="scoreBoard">
+                <p>Score: <span id="score">0</span></p>
+                <p>Top Score: <span id="topScore">0</span></p>
+                <p>Time: <span id="gameTime">00:00</span></p>
+            </div>
+            <div>
+                <label for="speedControl">Step Delay:</label>
+                <input type="range" id="speedControl" min="100" max="1000" value="500" step="100">
+            </div>
+            <div>
+                <button id="startButton">Start Game</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        const gridElement = document.getElementById('tetrisGrid');
+        const gridWidth = 20;
+        const gridHeight = 27;
+        const grid = Array.from({ length: gridHeight }, () => Array(gridWidth).fill(null));
+        const speedControl = document.getElementById('speedControl');
+        speedControl.addEventListener('input', () => {
+            if (gameInterval) clearInterval(gameInterval);
+            gameInterval = setInterval(gameLoop, parseInt(speedControl.value));
+        });
+
+
+
+        let activeShape = null;
+        let gameInterval = null;
+        let score = 0;
+        let topScore = parseInt(localStorage.getItem('tetrisTopScore')) || 0;
+        let nextShape = getNextShape(); // Initialize next shape
+        let startTime = null;
+
+
+
+        // Function to update the time
+        function updateTime() {
+                    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                    const minutes = Math.floor(elapsed / 60);
+                    const seconds = elapsed % 60;
+                    document.getElementById('gameTime').textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                }
+
+        // Initialize the score board
+        function initializeScoreboard() {
+            score = 0; // Reset the score
+            document.getElementById('score').textContent = score;
+            document.getElementById('topScore').textContent = topScore;
+        }
+
+        // Create the grid
+        function createGrid() {
+            gridElement.innerHTML = '';
+            gridElement.style.gridTemplateColumns = `repeat(${gridWidth}, 20px)`;
+            gridElement.style.gridTemplateRows = `repeat(${gridHeight}, 20px)`;
+            for (let i = 0; i < gridWidth * gridHeight; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                gridElement.appendChild(cell);
+            }
+        }
+
+        // Render the grid
+        function renderGrid() {
+            gridElement.querySelectorAll('.cell').forEach((cell, index) => {
+                cell.innerHTML = '';
+                const row = Math.floor(index / gridWidth);
+                const col = index % gridWidth;
+                if (grid[row][col]) {
+                    const block = document.createElement('div');
+                    block.classList.add('block', grid[row][col].className);
+                    cell.appendChild(block);
+                }
+            });
+
+            if (activeShape) {
+                activeShape.layout.forEach((row, rIdx) => {
+                    row.forEach((cell, cIdx) => {
+                        if (cell) {
+                            const targetRow = activeShape.row + rIdx;
+                            const targetCol = activeShape.col + cIdx;
+                            const index = targetRow * gridWidth + targetCol;
+                            const gridCell = gridElement.children[index];
+                            const block = document.createElement('div');
+                            block.classList.add('block', activeShape.className);
+                            gridCell.appendChild(block);
+                        }
+                    });
+                });
+            }
+        }
+
+        // Check for collisions
+        function checkCollision(newRow, newCol, layout = activeShape.layout) {
+            return layout.some((row, rIdx) =>
+                row.some((cell, cIdx) => {
+                    if (cell) {
+                        const targetRow = newRow + rIdx;
+                        const targetCol = newCol + cIdx;
+                        if (
+                            targetRow >= gridHeight ||
+                            targetCol < 0 || targetCol >= gridWidth ||
+                            (targetRow >= 0 && grid[targetRow][targetCol])
+                        ) {
+                            return true;
+                        }
+                    }
+                    return false;
+                })
+            );
+        }
+
+        // Place the shape on the grid
+        function placeShape() {
+            activeShape.layout.forEach((row, rIdx) => {
+                row.forEach((cell, cIdx) => {
+                    if (cell) {
+                        const targetRow = activeShape.row + rIdx;
+                        const targetCol = activeShape.col + cIdx;
+                        if (targetRow >= 0) {
+                            grid[targetRow][targetCol] = { className: activeShape.className };
+                        }
+                    }
+                });
+            });
+
+            // Add 5 points for each shape placed
+            updateScore(5);
+
+            // Clear rows and add points for cleared rows
+            clearRows();
+
+            // Start the next shape
+            activeShape = null;
+            startNextShape();
+        }
+
+        // Clear full rows
+        function clearRows() {
+            for (let row = gridHeight - 1; row >= 0; row--) {
+                if (grid[row].every(cell => cell)) {
+                    grid.splice(row, 1);
+                    grid.unshift(Array(gridWidth).fill(null));
+                    updateScore(15);  // Add 15 points for clearing a row
+                }
+            }
+        }
+
+        // Update score
+        function updateScore(points) {
+            score += points;
+            document.getElementById('score').textContent = score;
+            if (score > topScore) {
+                topScore = score;
+                localStorage.setItem('tetrisTopScore', topScore);
+                document.getElementById('topScore').textContent = topScore;
+            }
+        }
+
+        // Start the next shape
+        function startNextShape() {
+            activeShape = nextShape;
+            nextShape = getNextShape();
+            renderNextShape();
+            activeShape.row = 0;
+            activeShape.col = Math.floor(gridWidth / 2) - 2;
+            if (checkCollision(activeShape.row, activeShape.col)) {
+                clearInterval(gameInterval);
+                alert("Game Over!");
+            }
+        }
+
+        // Render the next shape
+        function renderNextShape() {
+            const nextShapeGrid = document.getElementById('nextShapeGrid');
+            nextShapeGrid.innerHTML = '';  // Clear previous next shape
+
+            const layout = nextShape.layout;
+            const rows = layout.length;
+            const cols = layout[0].length;
+
+            // Calculate the starting row and column to center the shape
+            const startRow = Math.floor((5 - rows) / 2);  // Center vertically in a 5x5 grid
+            const startCol = Math.floor((5 - cols) / 2);  // Center horizontally in a 5x5 grid
+
+            // Render the shape at the center of the 5x5 grid
+            layout.forEach((row, rIdx) => {
+                row.forEach((cell, cIdx) => {
+                    if (cell) {
+                        const block = document.createElement('div');
+                        block.classList.add('block', nextShape.className);
+                        block.style.width = '20px';
+                        block.style.height = '20px';
+                        block.style.gridColumnStart = startCol + cIdx + 1; // Offset by startCol
+                        block.style.gridRowStart = startRow + rIdx + 1; // Offset by startRow
+                        nextShapeGrid.appendChild(block);
+                    }
+                });
+            });
+        }
+
+        // Get the next random shape
+        function getNextShape() {
+            const shapes = [
+                    { layout: [[1, 1, 1, 1]], className: 'box1' }, // I shape
+                    { layout: [[1, 1], [1, 1]], className: 'box2' }, // O shape
+                    { layout: [[0, 1, 0], [1, 1, 1]], className: 'box3' }, // T shape
+                    { layout: [[0, 1, 1], [1, 1, 0]], className: 'box4' }, // S shape
+                    { layout: [[1, 1, 0], [0, 1, 1]], className: 'box5' }, // Z shape
+                    { layout: [[1, 1, 1], [1, 0, 0]], className: 'box6' }, // L shape
+                    { layout: [[1, 1, 1], [0, 0, 1]], className: 'box7' }, // J shape
+                    { layout: [[0, 1, 0], [1, 1, 1], [0, 1, 0]], className: 'box8' }, // + shape
+                    { layout: [[1, 1, 0], [0, 1, 0], [0, 1, 1]], className: 'box9' }, // Unique Z shape
+                    { layout: [[0, 1, 1], [0, 1, 0], [1, 1, 0]], className: 'box10' }, // Unique S shape
+                    { layout: [[1, 0, 1], [1, 1, 1], [1, 0, 1]], className: 'box11' }, // H shape
+                    { layout: [[1, 0, 1], [1, 0, 1], [1, 1, 1]], className: 'box12' }, // U shape
+                    { layout: [[1, 0, 0], [1, 0, 0], [1, 1, 1]], className: 'box13' }, // V shape
+                    { layout: [[1, 0, 0], [1, 1, 0], [0, 1, 1]], className: 'box14' }, // W shape
+                ];
+            const randomIndex = Math.floor(Math.random() * shapes.length);
+            return shapes[randomIndex];
+        }
+
+        // Game loop
+        function gameLoop() {
+            if (activeShape) {
+                if (!checkCollision(activeShape.row + 1, activeShape.col)) {
+                    activeShape.row++;
+                } else {
+                    placeShape();
+                }
+                
+            }
+            renderGrid();
+            updateTime();
+        }
+
+
+
+        // Handle keyboard events
+        window.addEventListener('keydown', (e) => {
+            if (!activeShape) return;
+
+            if (e.key === 'ArrowLeft' && !checkCollision(activeShape.row, activeShape.col - 1)) {
+                activeShape.col--;
+            } else if (e.key === 'ArrowRight' && !checkCollision(activeShape.row, activeShape.col + 1)) {
+                activeShape.col++;
+            } else if (e.key === 'ArrowDown') {
+                if (!checkCollision(activeShape.row + 1, activeShape.col)) {
+                    activeShape.row++;
+                } else {
+                    placeShape();
+                }
+            } else if (e.key === 'ArrowUp') {
+                const rotatedLayout = rotateShape(activeShape.layout);
+                if (!checkCollision(activeShape.row, activeShape.col, rotatedLayout)) {
+                    activeShape.layout = rotatedLayout;
+                }
+            }
+            renderGrid();
+        });
+
+        // Rotate the shape
+        function rotateShape(layout) {
+            return layout[0].map((_, index) => layout.map(row => row[index])).reverse();
+        }
+
+        // Start button functionality
+        document.getElementById('startButton').addEventListener('click', () => {
+            console.log('Start Button Clicked');
+            
+            // Reset the grid, score, and activeShape
+            initializeScoreboard();  // Reset the score display
+            createGrid();            // Create the game grid
+            startTime = Date.now();
+            
+            // Stop any ongoing game loop if exists
+            if (gameInterval) {
+                clearInterval(gameInterval);
+            }
+            
+            // Reset the grid and the game state
+            grid.forEach(row => row.fill(null)); // Clear the grid
+            startNextShape();  // Start the next shape
+            
+            // Start a new game loop with an interval of 500ms
+            gameInterval = setInterval(gameLoop, 500);
+        });
+
+    </script>
+</body>
+</html>

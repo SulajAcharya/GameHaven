@@ -1,0 +1,323 @@
+/* General styling for the body */
+body {
+    font-family: Arial, sans-serif; /* Use Arial font for the body */
+    overflow-x: hidden; /* Hide horizontal scrollbar if content overflows */
+    display: flex; /* Use flexbox for the layout of child elements */
+    flex-direction: column; /* Arrange the child elements vertically */
+    background-color: black; /* Set the background color to black */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    height: 100vh; /* Set the height of the body to the full height of the viewport */
+}
+
+
+.sidebar-games {
+    border-right: 1px solid #FFFFFF;
+    height: 90vh;
+    
+}
+
+.sidebar-games > ul {
+    padding: 0%;
+    width: 150px;
+}
+
+.sidebar-games > ul > li {
+    padding: 5px;
+}
+
+.sidebar-games > ul > li > a {
+    color: red;
+    text-decoration: none;
+}
+
+/* Navigation bar background */
+.nav-bg-color {
+    background-color: rgb(37, 136, 235); /* Set the background color of the navigation bar */
+    width: 100%; /* Ensure the navigation bar spans the full width */
+}
+
+/* Styling for navigation */
+nav {
+    display: flex; /* Use flexbox to arrange navigation items */
+    justify-content: space-around; /* Space out navigation items evenly */
+}
+
+/* Navbar links styling */
+.navbar-links {
+    list-style-type: none; /* Remove bullet points from the list */
+    display: flex; /* Use flexbox to arrange list items horizontally */
+    justify-content: space-around; /* Space out the links evenly */
+    padding: 0; /* Remove padding around the links */
+    width: 100%; /* Ensure the navbar takes up the full width */
+}
+
+/* Navbar link appearance */
+.navbar-links a {
+    text-decoration: none; /* Remove underline from links */
+    color: white; /* Set text color to white */
+}
+
+/* Navbar link hover effect */
+.navbar-links a:hover {
+    text-decoration: underline; /* Underline the text on hover */
+    text-underline-offset: 5px; /* Add spacing below the underline */
+    color: black; /* Change the text color to black on hover */
+}
+
+/* Main game container with horizontal scroll */
+.game-cont {
+    display: flex; /* Use flexbox for arranging items in a row */
+    white-space: nowrap; /* Prevent wrapping of items to the next line */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    padding: 10px; /* Add padding around the container */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
+    position: relative;
+    height: fit-content;
+}
+
+/* Hide scrollbar in WebKit browsers (Chrome, Safari) */
+.game-cont::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar */
+}
+
+/* Wrapper for each card to handle scaling overflow */
+.card-wrapper {
+    overflow: visible; /* Allow card content to overflow if needed */
+    position: relative; /* Ensure card's position can be adjusted */
+    flex: 0 0 auto; /* Prevent card from shrinking or stretching */
+    margin: 10px 5px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: fit-content;
+}
+
+.card-wrapper:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Individual card styling */
+.card {
+    width: 140px; /* Set width of the card */
+    height: 210px; /* Set height of the card */
+    background-color: white; /* Set background color of the card */
+    border-radius: 10px; /* Round the corners of the card */
+    margin: 10px; /* Add space between the cards */
+    transition: transform 0.3s ease; /* Add smooth scaling transition */
+    transform-origin: center; /* Scale the card from the center */
+    position: relative; /* Ensure the card content stays inside the card */
+}
+
+/* Card hover effect for scaling */
+.card:hover {
+    transform: scale(1.15); /* Scale the card by 1.15 times on hover */
+    border: 2px solid rgb(160, 32, 240);
+}
+
+/* Card image styling */
+.card-image {
+    width: 100%; /* Make the image fill the full width of the card */
+    height: 100%; /* Make the image fill the full height of the card */
+    object-fit: cover; /* Ensure the image covers the card area without distortion */
+    border-radius: 8px; /* Round the corners of the image */
+}
+
+/* Card content styling */
+.card-content {
+    position: absolute; /* Position the content absolutely inside the card */
+    bottom: 0; /* Stick the content to the bottom of the card */
+    left: 0; /* Align the content to the left of the card */
+    right: 0; /* Align the content to the right of the card */
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background for readability */
+    border-bottom-left-radius: 8px; /* Round the bottom left corner */
+    border-bottom-right-radius: 8px; /* Round the bottom right corner */
+    color: white; /* Set the text color to white */
+    display: flex; /* Use flexbox to align items inside the content area */
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    height: 30px; /* Set a fixed height for the content area */
+}
+
+a {
+    color: black;
+}
+
+/* Card title styling */
+.card-title {
+    font-size: 1em; /* Set font size for the card title */
+    margin: 0; /* Remove margin to ensure title fits within the content area */
+    text-align: center; /* Center the text horizontally */
+}
+
+/* Floating footer */
+.footer {
+    position: fixed;         /* Fixes the footer */
+    bottom: 10px;            /* Positions it 10px from the bottom */
+    right: 10px;             /* Positions it 10px from the right */
+    background: none;
+    color: black;            /* Footer text color */
+    border-radius: 25%;
+    font-size: 14px;
+    z-index: 1000;           /* Ensures it appears above other elements */
+    margin-right: 20px;
+}
+
+.wrapper {
+    display: inline-flex;
+    list-style: none;
+}
+
+.wrapper .icon {
+    position: relative;
+    background: white;
+    border-radius: 50%;
+    padding: 8px; /* For space around the icon */
+    margin: 5px;
+    width: 25px;
+    height: 24px;
+    font-size: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip {
+    position: absolute;
+    top: 0;
+    font-size: 14px;
+    background-color: white;
+    color: white;
+    padding: 5px 8px;
+    border-radius: 5px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip::before {
+    position: absolute;
+    content: "";
+    height: 8px;
+    width: 8px;
+    background: white;
+    bottom: -3px;
+    left: 50%;
+    transform: translate(-50%) rotate(45deg);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .icon:hover .tooltip {
+    top: -45px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.wrapper .icon:hover span,
+.wrapper .icon:hover .tooltip {
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper .github:hover,
+.wrapper .github:hover .tooltip,
+.wrapper .github:hover .tooltip::before {
+    background: linear-gradient(
+        180deg,
+        rgba(129, 34, 144, 1) 0%,
+        rgba(77, 34, 124, 1) 91%
+    );
+    color: white;
+}
+
+.wrapper .linkedin:hover,
+.wrapper .linkedin:hover .tooltip,
+.wrapper .linkedin:hover .tooltip::before {
+    background: #1877b5;
+    color: white;
+}
+
+.wrapper .facebook:hover,
+.wrapper .facebook:hover .tooltip,
+.wrapper .facebook:hover .tooltip::before {
+    background: #1877F2;
+    color: white;
+}
+
+.wrapper .instagram:hover,
+.wrapper .instagram:hover .tooltip,
+.wrapper .instagram:hover .tooltip::before {
+    background: linear-gradient(
+        70deg,
+        #ff7a00 11.92%,
+        #ff0169 51.56%,
+        #d300c5 85.69%
+    );
+    color: white;
+}
+
+.wrapper .whatsapp:hover,
+.wrapper .whatsapp:hover .tooltip,
+.wrapper .whatsapp:hover .tooltip::before {
+    background: #075e54;
+    color: white;
+}
+
+/* Feedback Form CSS */
+.feedback-container {
+    margin: auto;
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    width: 500px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+@media (max-width: 768px) {
+    .sidebar-games {
+        display: none; /* Collapsed on small screens */
+    }
+    .mobile-sidebar {
+        display: block; /* Replace with a toggleable menu */
+    }
+}

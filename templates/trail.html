@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Endless Car Game - Fixed Lanes</title>
+  <style>
+    /* Base styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #0a0f1c;
+      overflow: hidden;
+    }
+
+    .game-container {
+      position: relative;
+      width: 400px;
+      height: 700px;
+      border: 2px solid #fff;
+      overflow: hidden;
+      background: linear-gradient(to bottom, #0a0f1c, #1a1e2a); /* Road gradient */
+    }
+
+    #game-area {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Player Car */
+    #player-car {
+      position: absolute;
+      bottom: 30px;
+      width: 50px;
+      height: 100px;
+      transition: left 0.2s;
+      z-index: 10;
+      filter: drop-shadow(0 0 10px #ff0);
+    }
+
+    /* Obstacle Vehicle */
+    .obstacle {
+      position: absolute;
+      width: 50px; /* Same width as player car */
+      height: 100px; /* Same height as player car */
+      background-size: cover; /* Ensure the image covers the entire div */
+      background-repeat: no-repeat; /* Prevent image tiling */
+      background-position: center; /* Center the image */
+      border-radius: 5px;
+      filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.7));
+    }
+
+    /* Lane Dividers */
+    .lane-divider {
+      position: absolute;
+      width: 5px;
+      height: 50px;
+      background: #fff;
+      opacity: 0.5;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: moveDivider 1s linear infinite;
+    }
+
+    @keyframes moveDivider {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(700px); }
+    }
+
+    /* Score Display */
+    #score {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      z-index: 10;
+      text-shadow: 0 0 5px #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <div id="game-area">
+      <img id="player-car" src="C:/Users/Sulaj Acharya/Downloads/car3.svg" alt="Car">
+    </div>
+    <div id="score">Score: 0</div>
+  </div>
+  <script>
+    const gameArea = document.getElementById('game-area');
+    const playerCar = document.getElementById('player-car');
+    const scoreElement = document.getElementById('score');
+
+    let score = 0;
+    let playerLane = 3; // Start in the middle lane (out of 7 lanes)
+
+    // Calculate lane positions dynamically based on container width and number of lanes
+    const gameContainerWidth = 400; // Fixed width of the game container
+    const laneCount = 7; // Number of lanes (updated to 7)
+    const laneWidth = gameContainerWidth / laneCount; // Width of each lane
+    const lanes = Array.from({ length: laneCount }, (_, i) => laneWidth * i + laneWidth / 2 - 25);
+
+    // Set initial position
+    playerCar.style.left = `${lanes[playerLane]}px`;
+
+    // Move player car left or right
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft' && playerLane > 0) {
+        playerLane--;
+      } else if (event.key === 'ArrowRight' && playerLane < lanes.length - 1) {
+        playerLane++;
+      }
+      playerCar.style.left = `${lanes[playerLane]}px`;
+    });
+
+    // Track active obstacles
+    let activeObstacles = [];
+
+    // Obstacle logic - Multiple Obstacles with staggered spawn
+    function createObstacles() {
+      // Limit the number of obstacles to 3 and randomize lanes
+      if (activeObstacles.length >= 3) return; // Stop if there are already 3 obstacles on the screen
+
+      const availableLanes = Array.from({ length: laneCount }, (_, i) => i); // Get all lane indices
+      const usedLanes = [];
+
+      // Randomly select up to 3 lanes for obstacles
+      const obstacleCount = Math.min(3, Math.floor(Math.random() * 3) + 1); // Ensure up to 3 obstacles max
+
+      for (let i = 0; i < obstacleCount; i++) {
+        let randomLane;
+        // Ensure no lane has more than one obstacle
+        do {
+          randomLane = availableLanes[Math.floor(Math.random() * availableLanes.length)];
+        } while (usedLanes.includes(randomLane));
+
+        usedLanes.push(randomLane);
+
+        const obstacle = document.createElement('div');
+        obstacle.classList.add('obstacle');
+        obstacle.style.left = `${lanes[randomLane]}px`; // Place in random lane
+        obstacle.style.top = `${-100 - Math.random() * 200}px`; // Random vertical start position to prevent overlap
+
+        // Assign random obstacle image
+        const obstacleImages = [
+          'C:/Users/Sulaj Acharya/Downloads/car1.png',
+          'C:/Users/Sulaj Acharya/Downloads/car2.png',
+          'C:/Users/Sulaj Acharya/Downloads/car3.png',
+          'C:/Users/Sulaj Acharya/Downloads/car4.png'
+        ];
+        obstacle.style.backgroundImage = `url('${obstacleImages[Math.floor(Math.random() * obstacleImages.length)]}')`;
+
+        gameArea.appendChild(obstacle);
+        activeObstacles.push(obstacle);
+
+        let obstacleMovementInterval = setInterval(() => {
+          const obstacleTop = parseInt(window.getComputedStyle(obstacle).top);
+          obstacle.style.top = `${obstacleTop + 6}px`; // Move down 6px
+
+          const carRect = playerCar.getBoundingClientRect();
+          const obsRect = obstacle.getBoundingClientRect();
+
+          // Collision detection
+          if (
+            carRect.left < obsRect.right &&
+            carRect.right > obsRect.left &&
+            carRect.top < obsRect.bottom &&
+            carRect.bottom > obsRect.top
+          ) {
+            alert('Game Over! Score: ' + score);
+            location.reload();
+          }
+
+          // Remove obstacle if it moves out of the screen
+          if (obstacleTop > 700) {
+            clearInterval(obstacleMovementInterval);
+            gameArea.removeChild(obstacle);
+            activeObstacles = activeObstacles.filter(o => o !== obstacle); // Remove from active obstacles array
+          }
+        }, 10);
+      }
+    }
+
+    // Score Timer: Increment score every second
+    setInterval(() => {
+      score++;
+      scoreElement.textContent = `Score: ${score}`;
+    }, 1000);
+
+    // Create obstacles every 1.5 seconds if there are less than 3 active obstacles
+    setInterval(() => {
+      createObstacles();
+    }, 1500);
+  </script>
+</body>
+</html>

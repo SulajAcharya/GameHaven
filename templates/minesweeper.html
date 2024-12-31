@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #2e3440;
+            color: #eceff4;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            /* flex-direction: column; */
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+            justify-content: space-between;
+        }
+
+        .rules-container {
+            max-width: 400px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #3b4252;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .rules-container h1 {
+            margin-bottom: 10px;
+            color: #88c0d0;
+            font-size: 24px;
+        }
+
+        .rules-container h2 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #81a1c1;
+        }
+
+        .rules-container ul {
+            list-style-type: disc;
+            padding: 0;
+            margin: 10px 0;
+            color: #d8dee9;
+            text-align: left;
+            padding: 20px;
+        }
+
+        .rules-container ul li {
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #88c0d0;
+            color: #2e3440;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #81a1c1;
+            transform: scale(1.05);
+        }
+
+        #game-board {
+            display: grid;
+            gap: 3px;
+            padding: 10px;
+            background-color: #3b4252;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .cell {
+            width: 40px;
+            height: 40px;
+            background-color: #4c566a;
+            color: transparent;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .cell:hover {
+            background-color: #5e81ac;
+            transform: scale(1.05);
+        }
+
+        .cell.revealed {
+            background-color: #eceff4;
+            color: #2e3440;
+            cursor: default;
+        }
+
+        .cell.mine {
+            background-color: #bf616a;
+            color: white;
+        }
+
+        .cell.flagged {
+            background-color: #ebcb8b;
+            color: #2e3440;
+        }
+
+        /* Number colors */
+        .number-1 { color: #5e81ac; }
+        .number-2 { color: #a3be8c; }
+        .number-3 { color: #d08770; }
+        .number-4 { color: #bf616a; }
+        .number-5 { color: #b48ead; }
+
+    </style>
+</head>
+<body>
+    <h1>Minesweeper</h1>
+    <div class="container">
+        <!-- Rules section -->
+        
+        <div class="rules-container">
+            
+            <h2>How to Play:</h2>
+            <ul>
+                <li>Click a cell to reveal it - watch out for numbers and empty spaces!</li>
+                <li>Hit a mine, and it's game over! 💣</li>
+                <li>Numbers tell you how many mines are nearby. For example, "3" means 3 mines around it!</li>
+                <li>Right-click to flag a cell if you think there's a mine there. 🚩</li>
+                <li>Reveal all safe cells to win, without hitting any mines!</li>
+                <li>Don't worry if you flag the wrong cell - just click to remove the flag!</li>
+            </ul>
+            <button onclick="resetGame()">Reset Game</button>
+        </div>
+
+        <!-- Game board section -->
+        <div id="game-board"></div>
+    </div>
+
+    <script>
+        const BOARD_SIZE = 12; // 12x12 grid
+        const MINE_COUNT = 25; // Increased mines for complexity
+        let board = [];
+        let gameOver = false;
+
+        const boardEl = document.getElementById("game-board");
+
+        function resetGame() {
+            board = [];
+            gameOver = false;
+            boardEl.innerHTML = '';
+            boardEl.style.gridTemplateColumns = `repeat(${BOARD_SIZE}, 40px)`;
+
+            createBoard();
+            placeMines();
+            updateNumbers();
+        }
+
+        function createBoard() {
+            for (let row = 0; row < BOARD_SIZE; row++) {
+                const rowArr = [];
+                for (let col = 0; col < BOARD_SIZE; col++) {
+                    const cell = document.createElement("div");
+                    cell.classList.add("cell");
+                    cell.dataset.row = row;
+                    cell.dataset.col = col;
+                    cell.addEventListener("click", () => revealCell(row, col));
+                    cell.addEventListener("contextmenu", (e) => {
+                        e.preventDefault();
+                        flagCell(row, col);
+                    });
+                    boardEl.appendChild(cell);
+                    rowArr.push({ mine: false, revealed: false, flagged: false, adjacentMines: 0 });
+                }
+                board.push(rowArr);
+            }
+        }
+
+        function placeMines() {
+            let placedMines = 0;
+            while (placedMines < MINE_COUNT) {
+                const row = Math.floor(Math.random() * BOARD_SIZE);
+                const col = Math.floor(Math.random() * BOARD_SIZE);
+                if (!board[row][col].mine) {
+                    board[row][col].mine = true;
+                    placedMines++;
+                }
+            }
+        }
+
+        function updateNumbers() {
+            for (let row = 0; row < BOARD_SIZE; row++) {
+                for (let col = 0; col < BOARD_SIZE; col++) {
+                    if (board[row][col].mine) continue;
+
+                    let mineCount = 0;
+                    for (let r = -1; r <= 1; r++) {
+                        for (let c = -1; c <= 1; c++) {
+                            const newRow = row + r;
+                            const newCol = col + c;
+                            if (
+                                newRow >= 0 &&
+                                newRow < BOARD_SIZE &&
+                                newCol >= 0 &&
+                                newCol < BOARD_SIZE &&
+                                board[newRow][newCol].mine
+                            ) {
+                                mineCount++;
+                            }
+                        }
+                    }
+                    board[row][col].adjacentMines = mineCount;
+                }
+            }
+        }
+
+        function revealCell(row, col) {
+            if (gameOver || board[row][col].revealed || board[row][col].flagged) return;
+
+            const cell = board[row][col];
+            cell.revealed = true;
+            const cellEl = getCellElement(row, col);
+            cellEl.classList.add("revealed");
+
+            if (cell.mine) {
+                cellEl.classList.add("mine");
+                cellEl.textContent = "💣";
+                gameOver = true;
+                revealAllBombs();
+                alert("Game Over!");
+                return;
+            }
+
+            if (cell.adjacentMines > 0) {
+                cellEl.textContent = cell.adjacentMines;
+                cellEl.classList.add(`number-${cell.adjacentMines}`);
+            } else {
+                for (let r = -1; r <= 1; r++) {
+                    for (let c = -1; c <= 1; c++) {
+                        const newRow = row + r;
+                        const newCol = col + c;
+                        if (newRow >= 0 && newRow < BOARD_SIZE && newCol >= 0 && newCol < BOARD_SIZE) {
+                            revealCell(newRow, newCol);
+                        }
+                    }
+                }
+            }
+
+            checkWin();
+        }
+
+        function revealAllBombs() {
+            for (let row = 0; row < BOARD_SIZE; row++) {
+                for (let col = 0; col < BOARD_SIZE; col++) {
+                    const cell = board[row][col];
+                    const cellEl = getCellElement(row, col);
+                    if (cell.mine) {
+                        cellEl.classList.add("mine");
+                        cellEl.textContent = "💣";
+                    } else if (!cell.revealed) {
+                        cellEl.classList.add("revealed");
+                        if (cell.adjacentMines > 0) {
+                            cellEl.textContent = cell.adjacentMines;
+                            cellEl.classList.add(`number-${cell.adjacentMines}`);
+                        }
+                    }
+                }
+            }
+        }
+
+        function flagCell(row, col) {
+            if (gameOver || board[row][col].revealed) return;
+
+            const cell = board[row][col];
+            cell.flagged = !cell.flagged;
+            const cellEl = getCellElement(row, col);
+            cellEl.classList.toggle("flagged");
+            cellEl.textContent = cell.flagged ? "🚩" : "";
+        }
+
+        function getCellElement(row, col) {
+            return boardEl.querySelector(`[data-row='${row}'][data-col='${col}']`);
+        }
+
+        function checkWin() {
+            for (let row = 0; row < BOARD_SIZE; row++) {
+                for (let col = 0; col < BOARD_SIZE; col++) {
+                    const cell = board[row][col];
+                    if (!cell.mine && !cell.revealed) return;
+                }
+            }
+            alert("You win!");
+            gameOver = true;
+        }
+
+        resetGame();
+    </script>
+</body>
+</html>
