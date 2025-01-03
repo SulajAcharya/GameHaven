@@ -3,33 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameHaven</title>
+    <title>Gaming Website</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
 </head>
 <body>
     <header>
-        <div class="nav-bg-color">
-            <nav>
-                <ul class="navbar-links">
-                    <li><a href="#logo" style="color: blue;">GameHaven</a></li>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="aboutus.html">About Us</a></li>
-                    <li><a href="faqs.html">FAQs</a></li>
-                    <li><a href="help.html">Help</a></li>
-                    <li><a href="contactus.html" class="cta-button">Contact Us</a></li>
-                    <li><a href="feedback.html" target="_blank">Feedback</a></li>
-                    {% if session.get('user_id') %}
-                        <li><a href="{{ url_for('profile') }}">Profile</a></li>
-                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
-                    {% else %}
-                        <!-- <li><a href="{{ url_for('login') }}">Login</a></li> -->
-                        <li><a href="{{ url_for('login') }}">Login</a></li>
-                    {% endif %}
-                </ul>
-            </nav>
-        </div>
+        {% include 'navbar.html' %}
     </header>
 
     <main>
@@ -174,7 +155,7 @@
                     </a>
                 </div>
                 <div class="card-wrapper" id="bubble_shooter">
-                    <a href="{{ url_for('show_page', page_name='bubble_shooter') }}" class="card-link">
+                    <a href="{{ url_for('show_page', page_name='bubble_shooter') }}" class="card-link" target="_blank">
                         <div class="card">
                             <img src="{{ url_for('static', filename='images/image.jpg') }}" alt="Bubble Shooter" class="card-image">
                             <div class="card-content">

@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <style>
         /* Center everything on the screen */
-        body {
+        main {
             font-family: 'Arial', sans-serif;
             display: flex;
             flex-direction: column; /* Stack elements vertically */
@@ -147,38 +148,44 @@
     </style>
 </head>
 <body>
-    <h1>Tic-Tac-Toe</h1>
-    <div class="game-container">
-        <div class="cont">
-            <div class="game-rules">
-                <h2 style="text-align: center;">Rules & Guide</h2>
-                <ul>
-                    <li><b>Choose Your Mark:</b> One player is "X," and the other is "O."</li>
-                    <li><b>Take Turns:</b> Place your mark in an empty square on your turn.</li>
-                    <li><b>Win the Game:</b> Be the first to get three of your marks in a row (horizontal, vertical, or diagonal).</li>
-                    <li><b>Draw:</b> If all squares are filled without a winner, the game ends in a draw.</li>
-                    <li><b>New Game:</b> After a win or a draw, start a new game to play again.</li>
-                </ul>
-                <p style="text-align: center;"><b>Tip:</b> Watch your opponent's moves and block their attempts to win!</p>
+    <header>
+        {% include 'navbar.html' %}
+    </header>
+
+    <main>
+        <h1>Tic-Tac-Toe</h1>
+        <div class="game-container">
+            <div class="cont">
+                <div class="game-rules">
+                    <h2 style="text-align: center;">Rules & Guide</h2>
+                    <ul>
+                        <li><b>Choose Your Mark:</b> One player is "X," and the other is "O."</li>
+                        <li><b>Take Turns:</b> Place your mark in an empty square on your turn.</li>
+                        <li><b>Win the Game:</b> Be the first to get three of your marks in a row (horizontal, vertical, or diagonal).</li>
+                        <li><b>Draw:</b> If all squares are filled without a winner, the game ends in a draw.</li>
+                        <li><b>New Game:</b> After a win or a draw, start a new game to play again.</li>
+                    </ul>
+                    <p style="text-align: center;"><b>Tip:</b> Watch your opponent's moves and block their attempts to win!</p>
+                </div>
+            </div>
+            <div class="cont">
+                <div id="grid" class="grid"></div>
+            </div>
+            <div class="cont">
+                <div class="game-stats">
+                    <p id="result"></p>
+                    <div id="gameStats">
+                        <p id="currentTurn" style="color: black;">Current Turn: Player X</p>
+                        <p id="winCountX">Player X: 0 Wins</p>
+                        <p id="winCountO">Player O: 0 Wins</p>
+                        <p id="drawCount">Draws: 0</p>
+                    </div>                
+                    <button id="newGameButton">New Game</button>
+                    <button id="aiButton">AI Mode: Off</button>
+                </div>
             </div>
         </div>
-        <div class="cont">
-            <div id="grid" class="grid"></div>
-        </div>
-        <div class="cont">
-            <div class="game-stats">
-                <p id="result"></p>
-                <div id="gameStats">
-                    <p id="currentTurn" style="color: black;">Current Turn: Player X</p>
-                    <p id="winCountX">Player X: 0 Wins</p>
-                    <p id="winCountO">Player O: 0 Wins</p>
-                    <p id="drawCount">Draws: 0</p>
-                </div>                
-                <button id="newGameButton">New Game</button>
-                <button id="aiButton">AI Mode: Off</button>
-            </div>
-        </div>
-    </div>
+    </main>
 
     <script>
         const board = Array(9).fill(null);

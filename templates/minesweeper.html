@@ -4,23 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minesweeper</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <style>
-        * {
+        /* * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
+        } */
 
-        body {
+        main {
             font-family: 'Arial', sans-serif;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            height: calc(100vh - 50px);
             background-color: #2e3440;
             color: #eceff4;
             padding: 20px;
+            
         }
 
         .container {
@@ -140,27 +142,33 @@
     </style>
 </head>
 <body>
-    <h1>Minesweeper</h1>
-    <div class="container">
-        <!-- Rules section -->
-        
-        <div class="rules-container">
-            
-            <h2>How to Play:</h2>
-            <ul>
-                <li>Click a cell to reveal it - watch out for numbers and empty spaces!</li>
-                <li>Hit a mine, and it's game over! 💣</li>
-                <li>Numbers tell you how many mines are nearby. For example, "3" means 3 mines around it!</li>
-                <li>Right-click to flag a cell if you think there's a mine there. 🚩</li>
-                <li>Reveal all safe cells to win, without hitting any mines!</li>
-                <li>Don't worry if you flag the wrong cell - just click to remove the flag!</li>
-            </ul>
-            <button onclick="resetGame()">Reset Game</button>
-        </div>
+    <header>
+        {% include 'navbar.html' %}
+    </header>
 
-        <!-- Game board section -->
-        <div id="game-board"></div>
-    </div>
+    <main>
+        <h1>Minesweeper</h1>
+        <div class="container">
+            <!-- Rules section -->
+            
+            <div class="rules-container">
+                
+                <h2>How to Play:</h2>
+                <ul>
+                    <li>Click a cell to reveal it - watch out for numbers and empty spaces!</li>
+                    <li>Hit a mine, and it's game over! 💣</li>
+                    <li>Numbers tell you how many mines are nearby. For example, "3" means 3 mines around it!</li>
+                    <li>Right-click to flag a cell if you think there's a mine there. 🚩</li>
+                    <li>Reveal all safe cells to win, without hitting any mines!</li>
+                    <li>Don't worry if you flag the wrong cell - just click to remove the flag!</li>
+                </ul>
+                <button onclick="resetGame()">Reset Game</button>
+            </div>
+    
+            <!-- Game board section -->
+            <div id="game-board"></div>
+        </div>
+    </main>
 
     <script>
         const BOARD_SIZE = 12; // 12x12 grid

@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Snake Game</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <style>
-    body {
+    main {
       margin: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      height: 100vh;
+      height: calc(100vh - 50px);
       background-color: #320032; /* Deep Purple Background */
       font-family: 'Arial', sans-serif;
       color: white;
@@ -42,7 +43,8 @@
       border: 2px solid #ff9900;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
       display: none;
-      margin-top: 30px;
+      margin-top: 10px;
+      /* margin-top: 30px; */
       animation: boardPop 0.6s ease-out;
     }
 
@@ -89,7 +91,7 @@
       position: absolute;
       width: 20px;
       height: 20px;
-      border-radius: 50%; /* Circular shape for snake */
+      border-radius: 5%; /* Circular shape for snake */
       transition: all 0.1s ease-in-out;
     }
 
@@ -98,7 +100,7 @@
       position: absolute;
       width: 20px;
       height: 20px;
-      border-radius: 50%; /* Circular shape for food */
+      border-radius: 5%; /* Circular shape for food */
       transition: all 0.2s ease;
       box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
     }
@@ -129,15 +131,21 @@
   </style>
 </head>
 <body>
-  <div class="score-container">
-    <div id="score-board">Score: <span id="score">0</span></div>
-    <div id="top-score-board"><span id="top-score">0</span></div>
-  </div>
+  <header>
+    {% include 'navbar.html' %}
+  </header>
 
-  <div id="game-container">
-    <div id="game-board"></div>
-    <button id="start-button">Start Game</button>
-  </div>
+  <main>
+    <div class="score-container">
+      <div id="score-board">Score: <span id="score">0</span></div>
+      <div id="top-score-board"><span id="top-score">0</span></div>
+    </div>
+  
+    <div id="game-container">
+      <div id="game-board"></div>
+      <button id="start-button">Start Game</button>
+    </div>
+  </main>
 
   <script>
     const board = document.getElementById('game-board');

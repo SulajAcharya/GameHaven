@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        main {
+            justify-items: center;
+            max-width: 100vw;
+            padding: 20px;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            background-color: aqua;
+            border-radius: 10px;
+            max-width: 1200px; /* Limiting the max-width of the feedback container */
+            width: 100%; /* Ensure the feedback container is responsive */
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        form {
+            max-width: 100%; /* Ensure form width is responsive */
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            width: 100%; /* Allow form to take up the full available width */
+            overflow: auto; /* Adds scrolling when content exceeds the container size */
+        }
+
+        textarea {
+            padding: 2px 4px;
+            box-sizing: border-box;
+            max-width: 100%; /* Ensure textarea doesn't overflow beyond container width */
+            height: calc(21px * 3 + 3px); /* 3 rows with padding */
+            width: 100%; /* Make textarea fill the available width */
+            line-height: 20px; /* Line height for each row */
+            resize: none; /* Disable resizing */
+            overflow-y: auto; /* Adds vertical scrollbar when content overflows */
+        }
+
+        h2, h3, label {
+            margin-bottom: 10px;
+        }
+
+        .question {
+            margin-bottom: 15px;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        {% include 'navbar.html' %}
+    </header>
+    <main>
+        <div class="feedback-container">
+            <h2>Feedback</h2>
+            <form action="">
+                <h3>Section 1: Overall Experience</h3>
+                <div class="question">
+                    <label>How would you rate your overall experience on our website?</label>
+                    <input type="radio" name="overall_experience" value="Excellent"> Excellent
+                    <input type="radio" name="overall_experience" value="Good"> Good
+                    <input type="radio" name="overall_experience" value="Fair"> Fair
+                    <input type="radio" name="overall_experience" value="Poor"> Poor
+                </div>
+
+                <div class="question">
+                    <label>What did you like least about our website?</label>
+                    <textarea name="likes" id="ques1"></textarea>
+                </div>
+
+                <!-- You can add more questions or sections here if necessary -->
+
+                <button type="submit">Submit Feedback</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

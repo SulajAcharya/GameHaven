@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Balloon Popper Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
     <style>
         /* Reset default styles */
-        * {
+        /* * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
+        } */
 
         /* Styling for the body */
-        body {
+        main {
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
@@ -89,28 +91,33 @@
     </style>
 </head>
 <body>
-    <div class="game-container">
-        <h1>balloon Popper</h1>
-        
-        <!-- Displaying score, time, and top score -->
-        <div style="display: flex; justify-content: space-between; margin: 0px 20px;">
-          <div class="score">
-              <p>Score: <span id="score">0</span></p>
-          </div>
-          <div class="time">
-              <p>Time Left: <span id="timeLeft">30</span> seconds</p>
-          </div>
-          <div class="top-score">
-            <p>Top Score: <span id="top-score">0</span></p>
-          </div>
+    <header>
+      {% include 'navbar.html' %}
+    </header>
+    <main>
+        <div class="game-container">
+            <h1>balloon Popper</h1>
+            
+            <!-- Displaying score, time, and top score -->
+            <div style="display: flex; justify-content: space-between; margin: 0px 20px;">
+              <div class="score">
+                  <p>Score: <span id="score">0</span></p>
+              </div>
+              <div class="time">
+                  <p>Time Left: <span id="timeLeft">30</span> seconds</p>
+              </div>
+              <div class="top-score">
+                <p>Top Score: <span id="top-score">0</span></p>
+              </div>
+            </div>
+    
+            <!-- Container for the balloons -->
+            <div id="balloons"></div>
+            
+            <!-- Start button to begin/restart the game -->
+            <button id="startBtn">Start Game</button>
         </div>
-
-        <!-- Container for the balloons -->
-        <div id="balloons"></div>
-        
-        <!-- Start button to begin/restart the game -->
-        <button id="startBtn">Start Game</button>
-    </div>
+    </main>
 
     <script>
     // Initial game variables

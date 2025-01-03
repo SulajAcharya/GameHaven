@@ -142,6 +142,11 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
 
+        # Validate that username and password are not None
+        if not username or not password:
+            flash('Username and password are required!', 'danger')
+            return redirect(url_for('login', next=next_page))
+
         # Find the user in the database
         user = mongo.db.users.find_one({'username': username})
 
@@ -161,6 +166,8 @@ def login():
 
     # Render the login page, passing the next parameter
     return render_template('login.html', next=next_page)
+
+
 
 # Route for logging out (clears the session)
 @app.route('/logout')
@@ -230,6 +237,31 @@ def not_found(e):
 @app.errorhandler(500)
 def internal_server_error(e):
     return render_template('500.html'), 500
+
+# Navbar pages
+@app.route('/about_us')
+def about_us():
+    return render_template('about_us.html')
+
+@app.route('/faq')
+def faq():
+    return render_template('faq.html')
+
+@app.route('/help')
+def help():
+    return render_template('help.html')
+
+@app.route('/contact_us')
+@login_required
+def contact_us():
+    return render_template('contact_us.html')
+
+@app.route('/feedback')
+@login_required
+def feedback():
+    return render_template('feedback.html')
+
+
 
 # Run the app
 if __name__ == '__main__':

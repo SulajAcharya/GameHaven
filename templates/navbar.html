@@ -1,0 +1,20 @@
+<div class="nav-bg-color">
+    <nav>
+        <ul class="navbar-links">
+            <a href="{{ url_for('index') }}" style="color: blue;"><img src="{{ url_for('static', filename='images/GameHavenLogo.png') }}" alt="Logo"></a>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+            <li><a href="{{ url_for('faq') }}">FAQs</a></li>
+            <li><a href="{{ url_for('help') }}">Help</a></li>
+            <li><a href="{{ url_for('contact_us') }}" class="cta-button">Contact Us</a></li>
+            <li><a href="{{ url_for('feedback') }}" target="_blank">Feedback</a></li>
+            {% if session.get('user_id') %}
+                <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+                <!-- <li><a href="{{ url_for('login') }}">Login</a></li> -->
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>

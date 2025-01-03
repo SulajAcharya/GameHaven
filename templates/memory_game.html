@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
     <style>
         /* Styling remains the same */
-        body {
+        main {
             margin: 0;
             padding: 0;
             background: black;
@@ -19,11 +21,11 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        header {
+        .bottom-header {
             display: flex;
             justify-content: space-between;
             width: 90%;
-            margin: 10px;
+            margin-top: 10px;
             color: white;
         }
 
@@ -34,7 +36,12 @@
         .grid {
             display: grid;
             grid-template-columns: repeat(11, 100px);
-            gap: 10px;
+            gap: 10px 11px;
+        }
+
+        .grid > * {
+            margin: 0;
+            padding: 0;
         }
 
         .card {
@@ -48,7 +55,7 @@
             width: 100%;
             height: 100%;
             transform-style: preserve-3d;
-            transition: transform 0.4s;
+            transition: transform 0.3s;
             cursor: pointer;
         }
 
@@ -61,7 +68,7 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 10px;
+            border-radius: 8px;
         }
 
         .card-front {
@@ -72,10 +79,6 @@
             background-size: cover;
             background-position: center;
             transform: rotateY(180deg);
-        }
-
-        main {
-            text-align: center;
         }
 
         select, button {
@@ -107,12 +110,15 @@
 </head>
 <body>
     <header>
-        <div>Flips: <span id="flipCounter">0</span></div>
-        <div>Least Flips: <span id="leastFlips">N/A</span></div>
-        <div>Matches Found: <span id="matchCounter">0</span></div>
+        {% include 'navbar.html' %}
     </header>
     
     <main>
+        <div class="bottom-header">
+            <div>Flips: <span id="flipCounter">0</span></div>
+            <div>Least Flips: <span id="leastFlips">N/A</span></div>
+            <div>Matches Found: <span id="matchCounter">0</span></div>
+        </div>
         <h1>Memory Match</h1>
         <div>
             <select id="topicSelector">
