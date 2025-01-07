@@ -10,6 +10,9 @@ body {
     height: 100vh; /* Set the height of the body to the full height of the viewport */
 }
 
+main {
+    height: calc(100vh - 50px); /* Set the height of the main content area */
+}
 
 .sidebar-games {
     border-right: 1px solid #FFFFFF;
@@ -91,6 +94,7 @@ nav {
     -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
     position: relative;
     height: fit-content;
+    top: 45vh;
 }
 
 /* Hide scrollbar in WebKit browsers (Chrome, Safari) */
