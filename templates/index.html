@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaming Website</title>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+
 </head>
+
 <body>
     <header>
         {% include 'navbar.html' %}
@@ -39,14 +42,15 @@
                 </ul>
             </div>
             <div>
-                
+
             </div>
             <div class="game-cont">
                 <!-- Each card is wrapped in a .card-wrapper to handle the scale overflow -->
                 <div class="card-wrapper" id="tic_tac_toe">
                     <a href="{{ url_for('show_page', page_name='tictactoe') }}" class="card-link">
                         <div class="card">
-                            <img src="{{ url_for('static', filename='images/tictactoe.jpg') }}" alt="Tic Tac Toe" class="card-image">
+                            <img src="{{ url_for('static', filename='images/tictactoe.jpg') }}" alt="Tic Tac Toe"
+                                class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Tic Tac Toe</h3>
                             </div>
@@ -56,7 +60,8 @@
                 <div class="card-wrapper" id="chess">
                     <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
                         <div class="card">
-                            <img src="{{ url_for('static', filename='images/chess.jpg') }}" alt="Chess Game" class="card-image" loading="lazy">
+                            <img src="{{ url_for('static', filename='images/chess.jpg') }}" alt="Chess Game"
+                                class="card-image" loading="lazy">
                             <div class="card-content">
                                 <h3 class="card-title">Chess</h3>
                             </div>
@@ -67,7 +72,8 @@
                 <div class="card-wrapper" id="memory_game">
                     <a href="{{ url_for('show_page', page_name='memory_game') }}" class="card-link">
                         <div class="card">
-                            <img src="{{ url_for('static', filename='images/memorygame.jpg') }}" alt="Memory Game" class="card-image">
+                            <img src="{{ url_for('static', filename='images/memorygame.jpg') }}" alt="Memory Game"
+                                class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Memory Game</h3>
                             </div>
@@ -77,7 +83,8 @@
                 <div class="card-wrapper" id="snake_and_ladder">
                     <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
                         <div class="card">
-                            <img src="{{ url_for('static', filename='images/snake&ladder.jpg') }}" alt="Snake & Ladder" class="card-image">
+                            <img src="{{ url_for('static', filename='images/snake&ladder.jpg') }}" alt="Snake & Ladder"
+                                class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Snake & Ladder</h3>
                             </div>
@@ -87,7 +94,8 @@
                 <div class="card-wrapper" id="ludo">
                     <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
                         <div class="card">
-                            <img src="{{ url_for('static', filename='images/ludo.webp') }}" alt="Ludo" class="card-image">
+                            <img src="{{ url_for('static', filename='images/ludo.webp') }}" alt="Ludo"
+                                class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Ludo</h3>
                             </div>
@@ -97,7 +105,8 @@
                 <div class="card-wrapper" id="maze_game">
                     <a href="{{ url_for('show_page', page_name='mazegame') }}" class="card-link">
                         <div class="card">
-                            <img src="{{ url_for('static', filename='images/mazegame.jpg') }}" alt="Maze Game" class="card-image">
+                            <img src="{{ url_for('static', filename='images/mazegame.jpg') }}" alt="Maze Game"
+                                class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Maze Game</h3>
                             </div>
@@ -107,7 +116,8 @@
                 <div class="card-wrapper" id="balloon_popper">
                     <a href="{{ url_for('show_page', page_name='balloon_popper') }}" class="card-link">
                         <div class="card">
-                            <img src="{{ url_for('static', filename='images/balloonpopper.jpg') }}" alt="Balloon Popper" class="card-image">
+                            <img src="{{ url_for('static', filename='images/balloonpopper.jpg') }}" alt="Balloon Popper"
+                                class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Balloon Popper</h3>
                             </div>
@@ -117,7 +127,8 @@
                 <div class="card-wrapper" id="minesweeper">
                     <a href="{{ url_for('show_page', page_name='minesweeper') }}" class="card-link">
                         <div class="card">
-                            <img src="{{ url_for('static', filename='images/minesweeper.jpg') }}" alt="Minesweeper" class="card-image">
+                            <img src="{{ url_for('static', filename='images/minesweeper.jpg') }}" alt="Minesweeper"
+                                class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Minesweeper</h3>
                             </div>
@@ -127,7 +138,8 @@
                 <div class="card-wrapper" id="pacman">
                     <a href="{{ url_for('show_page', page_name='pacmanclone') }}" class="card-link">
                         <div class="card">
-                            <img src="{{ url_for('static', filename='images/pacmanclone.jpg') }}" alt="Pacman" class="card-image">
+                            <img src="{{ url_for('static', filename='images/pacmanclone.jpg') }}" alt="Pacman"
+                                class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Pacman</h3>
                             </div>
@@ -137,7 +149,8 @@
                 <div class="card-wrapper" id="whack_a_mole">
                     <a href="{{ url_for('show_page', page_name='whack_a_mole') }}" class="card-link">
                         <div class="card">
-                            <img src="{{ url_for('static', filename='images/whack_a_mole.jpg') }}" alt="Whack A Mole" class="card-image">
+                            <img src="{{ url_for('static', filename='images/whack_a_mole.jpg') }}" alt="Whack A Mole"
+                                class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Whack A Mole</h3>
                             </div>
@@ -147,7 +160,8 @@
                 <div class="card-wrapper" id="tetris">
                     <a href="{{ url_for('show_page', page_name='tetris') }}" class="card-link">
                         <div class="card">
-                            <img src="{{ url_for('static', filename='images/tetris.jpg') }}" alt="Tetris" class="card-image">
+                            <img src="{{ url_for('static', filename='images/tetris.jpg') }}" alt="Tetris"
+                                class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Tetris</h3>
                             </div>
@@ -157,7 +171,8 @@
                 <div class="card-wrapper" id="bubble_shooter">
                     <a href="{{ url_for('show_page', page_name='bubble_shooter') }}" class="card-link" target="_blank">
                         <div class="card">
-                            <img src="{{ url_for('static', filename='images/image.jpg') }}" alt="Bubble Shooter" class="card-image">
+                            <img src="{{ url_for('static', filename='images/bubble_shooter.webp') }}"
+                                alt="Bubble Shooter" class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Bubble Shooter</h3>
                             </div>
@@ -167,7 +182,8 @@
                 <div class="card-wrapper" id="snake_game">
                     <a href="{{ url_for('show_page', page_name='snake_game') }}" class="card-link">
                         <div class="card">
-                            <img src="{{ url_for('static', filename='images/image.jpg') }}" alt="Snake Game" class="card-image">
+                            <img src="{{ url_for('static', filename='images/snake_game.webp') }}" alt="Snake Game"
+                                class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Snake Game</h3>
                             </div>
@@ -177,7 +193,8 @@
                 <div class="card-wrapper">
                     <a href="{{ url_for('show_page', page_name='sudoku') }}" class="card-link">
                         <div class="card">
-                            <img src="{{ url_for('static', filename='images/image.jpg') }}" alt="Sudoku" class="card-image">
+                            <img src="{{ url_for('static', filename='images/sudoku.webp') }}" alt="Sudoku"
+                                class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Sudoku</h3>
                             </div>
@@ -187,7 +204,8 @@
                 <div class="card-wrapper">
                     <a href="{{ url_for('show_page', page_name='trail') }}" class="card-link">
                         <div class="card">
-                            <img src="{{ url_for('static', filename='images/image.jpg') }}" alt="Chess" class="card-image">
+                            <img src="{{ url_for('static', filename='images/image.jpg') }}" alt="Chess"
+                                class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Trail</h3>
                             </div>
@@ -197,7 +215,8 @@
                 <div class="card-wrapper">
                     <a href="{{ url_for('show_page', page_name='tower_blocks') }}" class="card-link">
                         <div class="card">
-                            <img src="{{ url_for('static', filename='images/tower_blocks.webp') }}" alt="Tower Blocks" class="card-image">
+                            <img src="{{ url_for('static', filename='images/tower_blocks.webp') }}" alt="Tower Blocks"
+                                class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Tower Blocks</h3>
                             </div>
@@ -207,7 +226,8 @@
                 <div class="card-wrapper">
                     <a href="{{ url_for('show_page', page_name='chess') }}" class="card-link">
                         <div class="card">
-                            <img src="{{ url_for('static', filename='images/image.jpg') }}" alt="Chess" class="card-image">
+                            <img src="{{ url_for('static', filename='images/image.jpg') }}" alt="Chess"
+                                class="card-image">
                             <div class="card-content">
                                 <h3 class="card-title">Card 1 Title</h3>
                             </div>
@@ -217,7 +237,7 @@
             </div>
         </div>
     </main>
-    
+
 
     <footer>
         <!-- Floating Footer -->
@@ -253,10 +273,11 @@
                         <span><i class="fa-brands fa-whatsapp"></i></span>
                     </li>
                 </a>
-                
+
             </ul>
         </div>
     </footer>
-    
+
 </body>
+
 </html>
