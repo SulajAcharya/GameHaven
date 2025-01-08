@@ -4,23 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ full_name }}'s Profile</title>
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <style>
-        body {
+        main {
             font-family: Arial, sans-serif;
             background-color: #f4f7fc;
             color: #333;
             margin: 0;
             padding: 0;
-        }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
+            height: calc(100vh - 50px);
+            overflow: hidden;
         }
     
-        .container {
+        .prof-container {
             max-width: 1000px;
             margin: 30px auto;
             background-color: white;
@@ -29,6 +25,8 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            overflow-y: auto;
+            height: calc(100vh - 150px);
         }
     
         .profile-info {
@@ -102,59 +100,51 @@
         .actions a:hover {
             background-color: #45a049;
         }
-    
-        .edit-details {
-            background-color: #ff9800;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-    
-        .edit-details:hover {
-            background-color: #e68900;
-        }
     </style>
     
     
 </head>
 <body>
+    <header>
+        {% include 'navbar.html' %}
+    </header>
 
-    <div class="container">
-        <div class="profile-info">
-            <!-- Profile Banner -->
-            <img src="{{ url_for('static', filename='profile_pics/' + profile_pic.split('/')[-1]) }}" alt="Profile Banner" class="profile-banner">
-    
-            <!-- Profile Row: Profile Picture and Username -->
-            <div class="profile-row">
-                <!-- Profile Picture -->
-                <img src="{{ url_for('static', filename='profile_pics/' + profile_pic.split('/')[-1]) }}" alt="Profile Picture" class="profile-pic">
-                
-                <!-- Username -->
-                <span class="username">@{{ username }}</span>
+    <main>
+        <div class="prof-container">
+            <div class="profile-info">
+                <!-- Profile Banner -->
+                <img src="{{ url_for('static', filename='profile_pics/' + profile_pic.split('/')[-1]) }}" alt="Profile Banner" class="profile-banner">
+        
+                <!-- Profile Row: Profile Picture and Username -->
+                <div class="profile-row">
+                    <!-- Profile Picture -->
+                    <img src="{{ url_for('static', filename='profile_pics/' + profile_pic.split('/')[-1]) }}" alt="Profile Picture" class="profile-pic">
+                    
+                    <!-- Username -->
+                    <span class="username">@{{ username }}</span>
+                </div>
             </div>
+        
+            <div class="details">
+                <p><strong>Full Name:</strong> {{ full_name if full_name else 'Not provided' }}</p>
+                <p><strong>Email:</strong> {{ email if email else 'Not provided' }}</p>
+                <p><strong>Phone Number:</strong> {{ phone if phone else 'Not provided' }}</p>
+                <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
+                <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
+                <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
+                <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
+                <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
+                <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
+                <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
+            </div>
+        
+            <div class="actions">
+                <a href="{{ url_for('index') }}">Go to Home</a>
+                <a href="{{ url_for('logout') }}" style="background-color: #f44336;">Logout</a>
+            </div>
+        
         </div>
-    
-        <div class="details">
-            <p><strong>Full Name:</strong> {{ full_name if full_name else 'Not provided' }}</p>
-            <p><strong>Email:</strong> {{ email if email else 'Not provided' }}</p>
-            <p><strong>Phone Number:</strong> {{ phone if phone else 'Not provided' }}</p>
-            <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
-            <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
-            <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
-            <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
-            <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
-            <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
-            <p><strong>Date of Birth:</strong> {{ dob if dob else 'Not provided' }}</p>
-        </div>
-    
-        <div class="actions">
-            <a href="{{ url_for('index') }}">Go to Home</a>
-            <a href="{{ url_for('logout') }}" style="background-color: #f44336;">Logout</a>
-        </div>
-    
-    </div>
+    </main>
     
 </body>
 </html>

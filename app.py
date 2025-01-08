@@ -221,7 +221,7 @@ def edit_profile():
 @login_required  # Protect game pages so only logged-in users can access them
 def show_page(page_name):
     # List of valid game pages
-    pages = ['index', 'unloadedgame', 'memory_game', 'mazegame', 'tictactoe', 'balloon_popper', 'minesweeper', 'whack_a_mole', 'pacmanclone', 'tetris', 'snake_game', 'bubble_shooter', 'sudoku', 'trail', 'tower_blocks']
+    pages = ['index', 'unloadedgame', 'memory_game', 'mazegame', 'tictactoe', 'balloon_popper', 'minesweeper', 'whack_a_mole', 'pacmanclone', 'tetris', 'snake_game', 'bubble_shooter', 'sudoku', 'trail', 'tower_blocks', 'flappy_bird']
     
     # Check if the requested page is in the valid list of pages
     if page_name in pages:

@@ -1,7 +1,7 @@
 /* General styling for the body */
 body {
     font-family: Arial, sans-serif; /* Use Arial font for the body */
-    overflow-x: hidden; /* Hide horizontal scrollbar if content overflows */
+    overflow: hidden; /* Hide horizontal scrollbar if content overflows */
     display: flex; /* Use flexbox for the layout of child elements */
     flex-direction: column; /* Arrange the child elements vertically */
     background-color: black; /* Set the background color to black */
@@ -11,12 +11,17 @@ body {
 }
 
 main {
+    padding-top: 50px;
     height: calc(100vh - 50px); /* Set the height of the main content area */
+}
+
+.home-main-container {
+    height: calc(100vh - 50px);
 }
 
 .sidebar-games {
     border-right: 1px solid #FFFFFF;
-    height: 90vh;
+    height: calc(100vh - 50px);
     
 }
 
@@ -47,6 +52,9 @@ nav {
     height: 50px;
     width: 100%;
     align-items: baseline;
+    position: fixed;
+    z-index: 100;
+    background-color: #2588eb;
 }
 
 /* Navbar links styling */
@@ -89,12 +97,16 @@ nav {
     display: flex; /* Use flexbox for arranging items in a row */
     white-space: nowrap; /* Prevent wrapping of items to the next line */
     overflow-x: auto; /* Enable horizontal scrolling */
-    padding: 10px; /* Add padding around the container */
+    overflow-y: hidden;
+    /* padding: 0px 10px; Add padding around the container */
+    margin: 0px 10px;
     scrollbar-width: none; /* Hide scrollbar for Firefox */
     -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
     position: relative;
     height: fit-content;
-    top: 45vh;
+    width: calc(100vw - 180px);
+
+    /* top: 45vh; */
 }
 
 /* Hide scrollbar in WebKit browsers (Chrome, Safari) */
@@ -107,7 +119,7 @@ nav {
     overflow: visible; /* Allow card content to overflow if needed */
     position: relative; /* Ensure card's position can be adjusted */
     flex: 0 0 auto; /* Prevent card from shrinking or stretching */
-    margin: 10px 5px;
+    margin: 10px 0px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     height: fit-content;
 }
@@ -120,11 +132,11 @@ nav {
 
 /* Individual card styling */
 .card {
-    width: 140px; /* Set width of the card */
-    height: 210px; /* Set height of the card */
+    width: 150px; /* Set width of the card */
+    height: 230px; /* Set height of the card */
     background-color: white; /* Set background color of the card */
     border-radius: 10px; /* Round the corners of the card */
-    margin: 10px; /* Add space between the cards */
+    margin: 3px 10px; /* Add space between the cards */
     transition: transform 0.3s ease; /* Add smooth scaling transition */
     transform-origin: center; /* Scale the card from the center */
     position: relative; /* Ensure the card content stays inside the card */
@@ -132,7 +144,7 @@ nav {
 
 /* Card hover effect for scaling */
 .card:hover {
-    transform: scale(1.15); /* Scale the card by 1.15 times on hover */
+    transform: scale(1.05); /* Scale the card by 1.15 times on hover */
     border: 2px solid rgb(160, 32, 240);
 }
 
@@ -340,4 +352,28 @@ button:hover {
     .mobile-sidebar {
         display: block; /* Replace with a toggleable menu */
     }
+}
+
+.game-classifier {
+    overflow-y: auto;
+    margin: 15px 0px;
+    top: 65px;
+    padding-bottom: 42px;
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #555;
+        width: auto;
+        border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar {
+        background-color: #111;
+        width: 7px;    }
+}
+
+.game-classifier > div > h2 {
+    color: antiquewhite;
+    padding: 0%;
+    margin: 0px 0px 0px 30px;
+    border-radius: 5px;
 }

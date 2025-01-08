@@ -57,7 +57,7 @@
             height: 60px;
             border-radius: 7px 40px 20px;
             rotate: -135deg; /* This is an unused property */
-            cursor: pointer;
+            /* cursor: pointer; */
             pointer-events: auto; /* Ensure the click events are captured */
             animation: float 5s ease-in-out infinite; /* Animation for balloon movement */
             border: 1px solid #000; /* Add a white border */
@@ -104,7 +104,7 @@
                   <p>Score: <span id="score">0</span></p>
               </div>
               <div class="time">
-                  <p>Time Left: <span id="timeLeft">30</span> seconds</p>
+                  <p>Time Left: <span id="timeLeft">45</span> seconds</p>
               </div>
               <div class="top-score">
                 <p>Top Score: <span id="top-score">0</span></p>
@@ -150,7 +150,7 @@
 
             isGameActive = true;
             score = 0;
-            timeLeft = 30;
+            timeLeft = 45;
             scoreElement.textContent = score;
             timeElement.textContent = timeLeft;
 

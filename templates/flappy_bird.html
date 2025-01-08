@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flappy Bird</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="flappybird.png" type="image/x-icon">
+    <style>
+        main {
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 50px);
+            width: 100vw;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            /* background-color: #f0f0f0; */
+        }
+
+        canvas {
+            border: 1px solid #0a3cda;
+            background: url('static/images/FlappyBird/flappyback.png') no-repeat center center;
+            background-size: cover;
+            border-radius: 10px;
+        }
+
+        #scoreboard {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            font-size: 20px;
+            color: white;
+            font-family: Arial, sans-serif;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        #high-score,
+        #current-score {
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        {% include 'navbar.html' %}
+    </header>
+
+    <main>
+        <div id="scoreboard">
+            <div id="high-score">High Score: 0</div>
+            <div id="current-score">Score: 0</div>
+        </div>
+        <canvas id="myCanvas" width="1200" height="630" style="background: url('static/images/FlappyBird/flappyback.png'); height: auto;">
+        </canvas>
+    </main>
+
+    <script>
+        var ctx = myCanvas.getContext("2d");
+        var FPS = 40;
+        var jump_amount = -10;
+        var max_fall_speed = +10;
+        var acceleration = 1;
+        var pipe_speed = -2;
+        var game_mode = "prestart";
+        var time_game_last_running;
+        var bottom_bar_offset = 0;
+        var pipes = [];
+        var score = 0;
+        var highScore = localStorage.getItem('highScore') || 0;
+
+        // Update the scoreboard in the HTML
+        function updateScoreboard() {
+            document.getElementById('current-score').innerText = "Score: " + score;
+            document.getElementById('high-score').innerText = "High Score: " + highScore;
+        }
+
+        function MySprite(img_url) {
+            this.x = 0;
+            this.y = 0;
+            this.visible = true;
+            this.velocity_x = 0;
+            this.velocity_y = 0;
+            this.MyImg = new Image();
+            this.MyImg.src = img_url || "";
+            this.angle = 0;
+            this.flipV = false;
+            this.flipH = false;
+        }
+
+        MySprite.prototype.Do_Frame_Things = function () {
+            ctx.save();
+            ctx.translate(this.x + this.MyImg.width / 2, this.y + this.MyImg.height / 2);
+            ctx.rotate((this.angle * Math.PI) / 180);
+            if (this.flipV) ctx.scale(1, -1);
+            if (this.flipH) ctx.scale(-1, 1);
+            if (this.visible)
+                ctx.drawImage(this.MyImg, -this.MyImg.width / 2, -this.MyImg.height / 2);
+            this.x = this.x + this.velocity_x;
+            this.y = this.y + this.velocity_y;
+            ctx.restore();
+        };
+
+        function ImagesTouching(thing1, thing2) {
+            if (!thing1.visible || !thing2.visible) return false;
+            if (
+                thing1.x >= thing2.x + thing2.MyImg.width ||
+                thing1.x + thing1.MyImg.width <= thing2.x
+            )
+                return false;
+            if (
+                thing1.y >= thing2.y + thing2.MyImg.height ||
+                thing1.y + thing1.MyImg.height <= thing2.y
+            )
+                return false;
+            return true;
+        }
+
+        function Got_Player_Input(MyEvent) {
+            switch (game_mode) {
+                case "prestart": {
+                    game_mode = "running";
+                    score = 0; // Reset score when starting a new game
+                    break;
+                }
+                case "running": {
+                    bird.velocity_y = jump_amount;
+                    break;
+                }
+                case "over":
+                    if (new Date() - time_game_last_running > 1000) {
+                        reset_game();
+                        game_mode = "running";
+                        score = 0; // Reset score when restarting
+                        break;
+                    }
+            }
+            MyEvent.preventDefault();
+        }
+
+        addEventListener("touchstart", Got_Player_Input);
+        addEventListener("mousedown", Got_Player_Input);
+        addEventListener("keydown", Got_Player_Input);
+
+        function make_bird_slow_and_fall() {
+            if (bird.velocity_y < max_fall_speed) {
+                bird.velocity_y = bird.velocity_y + acceleration;
+            }
+            if (bird.y > myCanvas.height - bird.MyImg.height) {
+                bird.velocity_y = 0;
+                game_mode = "over";
+            }
+            if (bird.y < 0 - bird.MyImg.height) {
+                bird.velocity_y = 0;
+                game_mode = "over";
+            }
+        }
+
+        function add_pipe(x_pos, top_of_gap, gap_width) {
+            var top_pipe = new MySprite();
+            top_pipe.MyImg = pipe_piece;
+            top_pipe.x = x_pos;
+            top_pipe.y = top_of_gap - pipe_piece.height;
+            top_pipe.velocity_x = pipe_speed;
+            pipes.push(top_pipe);
+            var bottom_pipe = new MySprite();
+            bottom_pipe.MyImg = pipe_piece;
+            bottom_pipe.flipV = true;
+            bottom_pipe.x = x_pos;
+            bottom_pipe.y = top_of_gap + gap_width;
+            bottom_pipe.velocity_x = pipe_speed;
+            pipes.push(bottom_pipe);
+        }
+
+        function make_bird_tilt_appropriately() {
+            if (bird.velocity_y < 0) {
+                bird.angle = -15;
+            } else if (bird.angle < 70) {
+                bird.angle = bird.angle + 4;
+            }
+        }
+
+        function show_the_pipes() {
+            for (var i = 0; i < pipes.length; i++) {
+                pipes[i].Do_Frame_Things();
+            }
+        }
+
+        function check_for_end_game() {
+            for (var i = 0; i < pipes.length; i++)
+                if (ImagesTouching(bird, pipes[i])) game_mode = "over";
+        }
+
+        function display_intro_instructions() {
+            ctx.font = "25px Arial";
+            ctx.fillStyle = "red";
+            ctx.textAlign = "center";
+            ctx.fillText("Press, touch, or click to start", myCanvas.width / 2, myCanvas.height / 4);
+        }
+
+        function display_game_over() {
+            ctx.font = "30px Arial";
+            ctx.fillStyle = "red";
+            ctx.textAlign = "center";
+            ctx.fillText("Game Over", myCanvas.width / 2, 100);
+            ctx.fillText("Score: " + score, myCanvas.width / 2, 150);
+            ctx.font = "20px Arial";
+            ctx.fillText("Click, touch, or press to play again", myCanvas.width / 2, 300);
+
+            // Update the high score
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem('highScore', highScore); // Save the new high score
+            }
+        }
+
+        function display_bar_running_along_bottom() {
+            if (bottom_bar_offset < -23) bottom_bar_offset = 0;
+            ctx.drawImage(bottom_bar, bottom_bar_offset, myCanvas.height - bottom_bar.height);
+        }
+
+        function reset_game() {
+            bird.y = myCanvas.height / 2;
+            bird.angle = 0;
+            pipes = []; // Erase all the pipes
+            add_all_my_pipes(); // Add pipes back
+        }
+
+        function add_all_my_pipes() {
+            add_pipe(500, 270, 180);
+            add_pipe(800, 120, 200);
+            add_pipe(1100, 400, 160);
+            add_pipe(1400, 50, 170);
+            add_pipe(1700, 300, 190);
+            add_pipe(2000, 180, 150);
+            add_pipe(2300, 250, 140);
+            add_pipe(2600, 60, 200);
+            add_pipe(2900, 450, 180);
+            add_pipe(3200, 100, 140);
+            add_pipe(3500, 200, 190);
+            add_pipe(3800, 400, 160);
+            add_pipe(4100, 50, 170);
+            add_pipe(4400, 150, 140);
+            add_pipe(4700, 300, 200);
+            add_pipe(5000, 450, 150);
+            add_pipe(5300, 220, 250);
+            add_pipe(5600, 100, 190);
+            add_pipe(5900, 300, 160);
+            add_pipe(6200, 400, 140);
+            add_pipe(6500, 200, 150);
+            add_pipe(6800, 50, 170);
+            add_pipe(7100, 310, 180);
+            add_pipe(7400, 430, 200);
+            add_pipe(7700, 100, 250);
+            add_pipe(8000, 300, 190);
+            add_pipe(8300, 180, 150);
+            add_pipe(8600, 400, 160);
+            add_pipe(8900, 120, 140);
+            add_pipe(9200, 250, 200);
+            add_pipe(9500, 450, 180);
+            add_pipe(9800, 310, 170);
+            add_pipe(10100, 100, 160);
+            add_pipe(10400, 300, 140);
+            add_pipe(10700, 400, 150);
+            add_pipe(11000, 50, 190);
+            add_pipe(11300, 250, 200);
+            add_pipe(11600, 180, 140);
+            add_pipe(11900, 400, 180);
+            add_pipe(12200, 100, 150);
+            add_pipe(12500, 300, 160);
+            add_pipe(12800, 310, 170);
+            add_pipe(13100, 50, 190);
+            add_pipe(13400, 120, 140);
+            add_pipe(13700, 430, 200);
+            add_pipe(14000, 300, 150);
+            add_pipe(14300, 180, 160);
+            add_pipe(14600, 400, 140);
+            add_pipe(14900, 250, 170);
+            add_pipe(15200, 100, 180);
+            add_pipe(15500, 300, 200);
+            add_pipe(15800, 270, 140);
+            add_pipe(16100, 180, 160);
+            add_pipe(16300, 300, 160);
+            add_pipe(16600, 200, 160);
+            add_pipe(16900, 200, 160);
+            add_pipe(17200, 220, 160);
+            add_pipe(17500, 270, 160);
+            var finish_line = new MySprite("static/images/FlappyBird/flappyend.png");
+            finish_line.x = 16860;
+            finish_line.velocity_x = pipe_speed;
+            pipes.push(finish_line);
+        }
+
+        var pipe_piece = new Image();
+        pipe_piece.onload = add_all_my_pipes;
+        pipe_piece.src = "static/images/FlappyBird/flappypipe.png";
+
+        function Do_a_Frame() {
+            ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+            bird.Do_Frame_Things();
+            display_bar_running_along_bottom();
+            switch (game_mode) {
+                case "prestart": {
+                    display_intro_instructions();
+                    break;
+                }
+                case "running": {
+                    time_game_last_running = new Date();
+                    bottom_bar_offset = bottom_bar_offset + pipe_speed;
+                    show_the_pipes();
+                    make_bird_tilt_appropriately();
+                    make_bird_slow_and_fall();
+                    check_for_end_game();
+
+                    // Update score based on pipes passed
+                    for (var i = 0; i < pipes.length; i++) {
+                        if (pipes[i].x < bird.x && pipes[i].x + pipe_piece.width >= bird.x) {
+                            score++;
+                        }
+                    }
+                    break;
+                }
+                case "over": {
+                    make_bird_slow_and_fall();
+                    display_game_over();
+                    break;
+                }
+            }
+
+            // Update the scoreboard every frame
+            updateScoreboard();
+        }
+
+        var bottom_bar = new Image();
+        bottom_bar.src = "static/images/FlappyBird/flappybottom.png";
+
+        var bird = new MySprite("static/images/FlappyBird/flappybird.png");
+        bird.x = myCanvas.width / 3;
+        bird.y = myCanvas.height / 2;
+
+        setInterval(Do_a_Frame, 1000 / FPS);
+
+    </script>
+</body>
+
+</html>
