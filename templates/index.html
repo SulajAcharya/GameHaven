@@ -46,532 +46,1311 @@
                     <h2>All Games</h2>
                     <div class="game-cont">
                         <!-- Each card is wrapped in a .card-wrapper to handle the scale overflow -->
-                        <div class="card-wrapper" id="tic_tac_toe">
-                            <a href="{{ url_for('show_page', page_name='tictactoe') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/tictactoe.jpg') }}" alt="Tic Tac Toe"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Tic Tac Toe</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card-wrapper" id="chess">
-                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/chess.jpg') }}" alt="Chess Game"
-                                        class="card-image" loading="lazy">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Chess</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <!-- Repeat for other cards -->
-                        <div class="card-wrapper" id="memory_game">
-                            <a href="{{ url_for('show_page', page_name='memory_game') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/memorygame.jpg') }}" alt="Memory Game"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Memory Game</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card-wrapper" id="snake_and_ladder">
-                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/snake&ladder.jpg') }}" alt="Snake & Ladder"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Snake & Ladder</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card-wrapper" id="ludo">
-                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/ludo.webp') }}" alt="Ludo"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Ludo</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card-wrapper" id="maze_game">
-                            <a href="{{ url_for('show_page', page_name='mazegame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/mazegame.jpg') }}" alt="Maze Game"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Maze Game</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
                         <div class="card-wrapper" id="balloon_popper">
-                            <a href="{{ url_for('show_page', page_name='balloon_popper') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/balloonpopper.jpg') }}" alt="Balloon Popper"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Balloon Popper</h3>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='balloon_popper') }}"
+                                            class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/balloonpopper.jpg') }}"
+                                                    alt="Balloon Popper" class="card-image">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Balloon Popper</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Balloon Popper</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <div class="card-wrapper" id="minesweeper">
-                            <a href="{{ url_for('show_page', page_name='minesweeper') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/minesweeper.jpg') }}" alt="Minesweeper"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Minesweeper</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card-wrapper" id="pacman">
-                            <a href="{{ url_for('show_page', page_name='pacmanclone') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/pacmanclone.jpg') }}" alt="Pacman"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Pacman</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card-wrapper" id="whack_a_mole">
-                            <a href="{{ url_for('show_page', page_name='whack_a_mole') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/whackamole.jpg') }}" alt="Whack A Mole"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Whack A Mole</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card-wrapper" id="tetris">
-                            <a href="{{ url_for('show_page', page_name='tetris') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/tetris.jpg') }}" alt="Tetris"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Tetris</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+
                         <div class="card-wrapper" id="bubble_shooter">
-                            <a href="{{ url_for('show_page', page_name='bubble_shooter') }}" class="card-link" target="_blank">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/bubbleshooter.webp') }}"
-                                        alt="Bubble Shooter" class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Bubble Shooter</h3>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='bubble_shooter') }}"
+                                            class="card-link" target="_blank">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/bubbleshooter.webp') }}"
+                                                    alt="Bubble Shooter" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Bubble Shooter</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Bubble Shooter</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
+
+                        <div class="card-wrapper" id="chess">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='unloadedgame') }}"
+                                            class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/chess.jpg') }}"
+                                                    alt="Chess" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Chess</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Chess</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-wrapper" id="flappy_bird">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='flappy_bird') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/flappybird.webp') }}"
+                                                    alt="Flappy Bird" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Flappy Bird</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Flappy Bird</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-wrapper" id="ludo">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='unloadedgame') }}"
+                                            class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/ludo.webp') }}"
+                                                    alt="Ludo" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Chess</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Ludo</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-wrapper" id="maze_game">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='mazegame') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/mazegame.jpg') }}"
+                                                    alt="Maze Game" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Maze Game</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Maze Game</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-wrapper" id="memory_game">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='memory_game') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/memorygame.jpg') }}"
+                                                    alt="Memory Game" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Memory Game</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Memory Game</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-wrapper" id="minesweeper">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='minesweeper') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/minesweeper.jpg') }}"
+                                                    alt="Minesweeper" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Minesweeper</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Minesweeper</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-wrapper" id="pacman">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='pacmanclone') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/pacmanclone.jpg') }}"
+                                                    alt="Pacman" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Pacman</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Pacman</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-wrapper" id="snake_and_ladder">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='unloadedgame') }}"
+                                            class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/snake&ladder.jpg') }}"
+                                                    alt="Snake & Ladder" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Snake & Ladder</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Snake & Ladder</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="card-wrapper" id="snake_game">
-                            <a href="{{ url_for('show_page', page_name='snake_game') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/snakegame.webp') }}" alt="Snake Game"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Snake Game</h3>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='snake_game') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/snakegame.webp') }}"
+                                                    alt="Snake Game" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Snake Game</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Snake Game</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <div class="card-wrapper">
-                            <a href="{{ url_for('show_page', page_name='sudoku') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/sudoku.webp') }}" alt="Sudoku"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Sudoku</h3>
+
+                        <div class="card-wrapper" id="sudoku">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='sudoku') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/sudoku.webp') }}"
+                                                    alt="Sudoku" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Sudoku</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Sudoku</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <div class="card-wrapper">
-                            <a href="{{ url_for('show_page', page_name='trail') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/image.jpg') }}" alt="Chess"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Trail</h3>
+
+                        <div class="card-wrapper" id="tetris">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='tetris') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/tetris.jpg') }}"
+                                                    alt="Tetris" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Tetris</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Tetris</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <div class="card-wrapper">
-                            <a href="{{ url_for('show_page', page_name='tower_blocks') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/towerblocks.webp') }}" alt="Tower Blocks"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Tower Blocks</h3>
+
+                        <div class="card-wrapper" id="tic_tac_toe">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='tictactoe') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/tictactoe.jpg') }}"
+                                                    alt="Tic Tac Toe" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Tic Tac Toe</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Tic Tac Toe</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <div class="card-wrapper">
-                            <a href="{{ url_for('show_page', page_name='flappy_bird') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/flappybird.webp') }}" alt="Flappy Bird"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Flappy Bird</h3>
+
+                        <div class="card-wrapper" id="towerblocks">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='tower_blocks') }}"
+                                            class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/towerblocks.webp') }}"
+                                                    alt="Tower Blocks" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Tower Blocks</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Tower Blocks</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
+                        </div>
+
+                        <div class="card-wrapper" id="whack_a_mole">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='whack_a_mole') }}"
+                                            class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/whackamole.jpg') }}"
+                                                    alt="Whack A Mole" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Whack A Mole</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Whack A Mole</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-wrapper" id="trial">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='trail') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/image.jpg') }}"
+                                                    alt="Trial" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Trial</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Trial</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-wrapper" id="trial2">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='unloadedgame') }}"
+                                            class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/chess.jpg') }}"
+                                                    alt="Chess" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Trial 2</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Trial</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div>
                     <h2>Top Games</h2>
                     <div class="game-cont">
                         <!-- Each card is wrapped in a .card-wrapper to handle the scale overflow -->
-                        <div class="card-wrapper" id="tic_tac_toe">
-                            <a href="{{ url_for('show_page', page_name='tictactoe') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/tictactoe.jpg') }}" alt="Tic Tac Toe"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Tic Tac Toe</h3>
+                        <div class="card-wrapper" id="flappy_bird">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='flappy_bird') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/flappybird.webp') }}"
+                                                    alt="Flappy Bird" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Flappy Bird</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Flappy Bird</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <div class="card-wrapper" id="chess">
-                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/chess.jpg') }}" alt="Chess Game"
-                                        class="card-image" loading="lazy">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Chess</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <!-- Repeat for other cards -->
+
                         <div class="card-wrapper" id="memory_game">
-                            <a href="{{ url_for('show_page', page_name='memory_game') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/memorygame.jpg') }}" alt="Memory Game"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Memory Game</h3>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='memory_game') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/memorygame.jpg') }}"
+                                                    alt="Memory Game" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Memory Game</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Memory Game</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <div class="card-wrapper" id="snake_and_ladder">
-                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/snake&ladder.jpg') }}" alt="Snake & Ladder"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Snake & Ladder</h3>
+
+                        <div class="card-wrapper" id="tetris">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='tetris') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/tetris.jpg') }}"
+                                                    alt="Tetris" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Tetris</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Tetris</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <div class="card-wrapper" id="ludo">
-                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/ludo.webp') }}" alt="Ludo"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Ludo</h3>
+
+                        <div class="card-wrapper" id="bubble_shooter">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='bubble_shooter') }}"
+                                            class="card-link" target="_blank">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/bubbleshooter.webp') }}"
+                                                    alt="Bubble Shooter" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Bubble Shooter</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Bubble Shooter</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <div class="card-wrapper" id="maze_game">
-                            <a href="{{ url_for('show_page', page_name='mazegame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/mazegame.jpg') }}" alt="Maze Game"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Maze Game</h3>
+
+                        <div class="card-wrapper" id="towerblocks">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='tower_blocks') }}"
+                                            class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/towerblocks.webp') }}"
+                                                    alt="Tower Blocks" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Tower Blocks</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Tower Blocks</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <div class="card-wrapper" id="balloon_popper">
-                            <a href="{{ url_for('show_page', page_name='balloon_popper') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/balloonpopper.jpg') }}" alt="Balloon Popper"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Balloon Popper</h3>
+
+                        <div class="card-wrapper" id="whack_a_mole">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='whack_a_mole') }}"
+                                            class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/whackamole.jpg') }}"
+                                                    alt="Whack A Mole" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Whack A Mole</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Whack A Mole</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
+
                     </div>
                 </div>
+
+
                 <div>
-                    <h2>Top Games</h2>
+                    <h2>Puzzle & Strategy Games</h2>
+                    <div class="game-cont">
+                        <div class="card-wrapper" id="chess">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='unloadedgame') }}"
+                                            class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/chess.jpg') }}"
+                                                    alt="Chess" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Chess</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Chess</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-wrapper" id="sudoku">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='sudoku') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/sudoku.webp') }}"
+                                                    alt="Sudoku" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Sudoku</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Sudoku</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-wrapper" id="memory_game">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='memory_game') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/memorygame.jpg') }}"
+                                                    alt="Memory Game" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Memory Game</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Memory Game</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-wrapper" id="minesweeper">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='minesweeper') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/minesweeper.jpg') }}"
+                                                    alt="Minesweeper" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Minesweeper</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Minesweeper</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-wrapper" id="tetris">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='tetris') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/tetris.jpg') }}"
+                                                    alt="Tetris" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Tetris</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Tetris</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div>
+                    <h2>Arcade & Action Games</h2>
                     <div class="game-cont">
                         <!-- Each card is wrapped in a .card-wrapper to handle the scale overflow -->
-                        <div class="card-wrapper" id="tic_tac_toe">
-                            <a href="{{ url_for('show_page', page_name='tictactoe') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/tictactoe.jpg') }}" alt="Tic Tac Toe"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Tic Tac Toe</h3>
+                        <div class="card-wrapper" id="pacman">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='pacmanclone') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/pacmanclone.jpg') }}"
+                                                    alt="Pacman" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Pacman</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Pacman</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <div class="card-wrapper" id="chess">
-                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/chess.jpg') }}" alt="Chess Game"
-                                        class="card-image" loading="lazy">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Chess</h3>
+
+                        <div class="card-wrapper" id="flappy_bird">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='flappy_bird') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/flappybird.webp') }}"
+                                                    alt="Flappy Bird" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Flappy Bird</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Flappy Bird</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <!-- Repeat for other cards -->
-                        <div class="card-wrapper" id="memory_game">
-                            <a href="{{ url_for('show_page', page_name='memory_game') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/memorygame.jpg') }}" alt="Memory Game"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Memory Game</h3>
+
+                        <div class="card-wrapper" id="snake_game">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='snake_game') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/snakegame.webp') }}"
+                                                    alt="Snake Game" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Snake Game</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Snake Game</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <div class="card-wrapper" id="snake_and_ladder">
-                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/snake&ladder.jpg') }}" alt="Snake & Ladder"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Snake & Ladder</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card-wrapper" id="ludo">
-                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/ludo.webp') }}" alt="Ludo"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Ludo</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card-wrapper" id="maze_game">
-                            <a href="{{ url_for('show_page', page_name='mazegame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/mazegame.jpg') }}" alt="Maze Game"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Maze Game</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+
                         <div class="card-wrapper" id="balloon_popper">
-                            <a href="{{ url_for('show_page', page_name='balloon_popper') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/balloonpopper.jpg') }}" alt="Balloon Popper"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Balloon Popper</h3>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='balloon_popper') }}"
+                                            class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/balloonpopper.jpg') }}"
+                                                    alt="Balloon Popper" class="card-image">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Balloon Popper</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Balloon Popper</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
+
+                        <div class="card-wrapper" id="whack_a_mole">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='whack_a_mole') }}"
+                                            class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/whackamole.jpg') }}"
+                                                    alt="Whack A Mole" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Whack A Mole</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Whack A Mole</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+
+
                 <div>
-                    <h2>Kids Games</h2>
+                    <h2>Brain Teasers</h2>
                     <div class="game-cont">
                         <!-- Each card is wrapped in a .card-wrapper to handle the scale overflow -->
-                        <div class="card-wrapper" id="tic_tac_toe">
-                            <a href="{{ url_for('show_page', page_name='tictactoe') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/tictactoe.jpg') }}" alt="Tic Tac Toe"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Tic Tac Toe</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
                         <div class="card-wrapper" id="chess">
-                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/chess.jpg') }}" alt="Chess Game"
-                                        class="card-image" loading="lazy">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Chess</h3>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='unloadedgame') }}"
+                                            class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/chess.jpg') }}"
+                                                    alt="Chess" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Chess</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Chess</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <!-- Repeat for other cards -->
+
+                        <div class="card-wrapper" id="sudoku">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='sudoku') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/sudoku.webp') }}"
+                                                    alt="Sudoku" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Sudoku</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Sudoku</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-wrapper" id="minesweeper">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='minesweeper') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/minesweeper.jpg') }}"
+                                                    alt="Minesweeper" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Minesweeper</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Minesweeper</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="card-wrapper" id="memory_game">
-                            <a href="{{ url_for('show_page', page_name='memory_game') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/memorygame.jpg') }}" alt="Memory Game"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Memory Game</h3>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='memory_game') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/memorygame.jpg') }}"
+                                                    alt="Memory Game" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Memory Game</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Memory Game</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <div class="card-wrapper" id="snake_and_ladder">
-                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/snake&ladder.jpg') }}" alt="Snake & Ladder"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Snake & Ladder</h3>
+
+                        <div class="card-wrapper" id="towerblocks">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='tower_blocks') }}"
+                                            class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/towerblocks.webp') }}"
+                                                    alt="Tower Blocks" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Tower Blocks</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Tower Blocks</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <div class="card-wrapper" id="ludo">
-                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/ludo.webp') }}" alt="Ludo"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Ludo</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card-wrapper" id="maze_game">
-                            <a href="{{ url_for('show_page', page_name='mazegame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/mazegame.jpg') }}" alt="Maze Game"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Maze Game</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card-wrapper" id="balloon_popper">
-                            <a href="{{ url_for('show_page', page_name='balloon_popper') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/balloonpopper.jpg') }}" alt="Balloon Popper"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Balloon Popper</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+
                     </div>
                 </div>
+
+
                 <div>
-                    <h2>Top Games</h2>
+                    <h2>Retro Games</h2>
                     <div class="game-cont">
                         <!-- Each card is wrapped in a .card-wrapper to handle the scale overflow -->
-                        <div class="card-wrapper" id="tic_tac_toe">
-                            <a href="{{ url_for('show_page', page_name='tictactoe') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/tictactoe.jpg') }}" alt="Tic Tac Toe"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Tic Tac Toe</h3>
+                        <div class="card-wrapper" id="tetris">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='tetris') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/tetris.jpg') }}"
+                                                    alt="Tetris" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Tetris</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Tetris</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <div class="card-wrapper" id="chess">
-                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/chess.jpg') }}" alt="Chess Game"
-                                        class="card-image" loading="lazy">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Chess</h3>
+
+                        <div class="card-wrapper" id="pacman">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='pacmanclone') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/pacmanclone.jpg') }}"
+                                                    alt="Pacman" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Pacman</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Pacman</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <!-- Repeat for other cards -->
-                        <div class="card-wrapper" id="memory_game">
-                            <a href="{{ url_for('show_page', page_name='memory_game') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/memorygame.jpg') }}" alt="Memory Game"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Memory Game</h3>
+
+                        <div class="card-wrapper" id="bubble_shooter">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='bubble_shooter') }}"
+                                            class="card-link" target="_blank">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/bubbleshooter.webp') }}"
+                                                    alt="Bubble Shooter" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Bubble Shooter</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Bubble Shooter</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <div class="card-wrapper" id="snake_and_ladder">
-                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/snake&ladder.jpg') }}" alt="Snake & Ladder"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Snake & Ladder</h3>
+
+                        <div class="card-wrapper" id="snake_game">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='snake_game') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/snakegame.webp') }}"
+                                                    alt="Snake Game" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Snake Game</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Snake Game</h3>
+                                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                                    to align their marks in a grid.</p>
+                                        </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <div class="card-wrapper" id="ludo">
-                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/ludo.webp') }}" alt="Ludo"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Ludo</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card-wrapper" id="maze_game">
-                            <a href="{{ url_for('show_page', page_name='mazegame') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/mazegame.jpg') }}" alt="Maze Game"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Maze Game</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card-wrapper" id="balloon_popper">
-                            <a href="{{ url_for('show_page', page_name='balloon_popper') }}" class="card-link">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename='images/balloonpopper.jpg') }}" alt="Balloon Popper"
-                                        class="card-image">
-                                    <div class="card-content">
-                                        <h3 class="card-title">Balloon Popper</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+
                     </div>
                 </div>
+
+
             </div>
         </div>
     </main>
@@ -579,7 +1358,7 @@
 
     <footer>
         <!-- Floating Footer -->
-        <div class="footer">
+        <div class="main-footer">
             <ul class="wrapper">
                 <a href="https://github.com/SulajAcharya">
                     <li class="icon github">
@@ -611,10 +1390,16 @@
                         <span><i class="fa-brands fa-whatsapp"></i></span>
                     </li>
                 </a>
-
             </ul>
         </div>
     </footer>
+
+    <script>
+        function flipCard(button) {
+            const cardInner = button.closest('.flip-card').querySelector('.flip-card-inner');
+            cardInner.style.transform = cardInner.style.transform === 'rotateY(180deg)' ? 'rotateY(0deg)' : 'rotateY(180deg)';
+        }
+    </script>
 
 </body>
 

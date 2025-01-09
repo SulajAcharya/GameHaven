@@ -105,8 +105,7 @@ nav {
     position: relative;
     height: fit-content;
     width: calc(100vw - 180px);
-
-    /* top: 45vh; */
+    padding: 0%;
 }
 
 /* Hide scrollbar in WebKit browsers (Chrome, Safari) */
@@ -119,74 +118,161 @@ nav {
     overflow: visible; /* Allow card content to overflow if needed */
     position: relative; /* Ensure card's position can be adjusted */
     flex: 0 0 auto; /* Prevent card from shrinking or stretching */
-    margin: 10px 0px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* margin: 10px 0px; */
+    /* transition: transform 0.2s ease, box-shadow 0.2s ease; */
     height: fit-content;
 }
 
 .card-wrapper:hover {
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 
 /* Individual card styling */
-.card {
-    width: 150px; /* Set width of the card */
-    height: 230px; /* Set height of the card */
-    background-color: white; /* Set background color of the card */
-    border-radius: 10px; /* Round the corners of the card */
-    margin: 3px 10px; /* Add space between the cards */
-    transition: transform 0.3s ease; /* Add smooth scaling transition */
-    transform-origin: center; /* Scale the card from the center */
-    position: relative; /* Ensure the card content stays inside the card */
+.flip-card {
+    width: 150px;
+    height: 230px;
+    position: relative;
+    margin: 6px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    background-color: purple;
+    border-radius: 8px;
 }
 
-/* Card hover effect for scaling */
-.card:hover {
-    transform: scale(1.05); /* Scale the card by 1.15 times on hover */
-    border: 2px solid rgb(160, 32, 240);
+.flip-card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease, box-shadow 0.2s ease-in-out;
+    border-color: #0056b3;
+    border: 2px solid #0056b3;
 }
 
-/* Card image styling */
-.card-image {
-    width: 100%; /* Make the image fill the full width of the card */
-    height: 100%; /* Make the image fill the full height of the card */
-    object-fit: cover; /* Ensure the image covers the card area without distortion */
-    border-radius: 8px; /* Round the corners of the image */
+.flip-card-inner {
+    width: 100%;
+    height: 100%;
+    will-change: transform; /* Hint to browser to optimize rendering */
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    position: relative;
+    padding: 0px;
+    margin: 0px;
 }
 
-/* Card content styling */
+.flip-card-front, .flip-card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0px
+}
+
+.flip-card-front {
+    background: white;
+    padding: 0%;
+    width: 150px;
+    height: 230px;
+    margin: 0px;
+}
+
+.flip-card-back {
+    background: purple;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    /* padding: 10px; */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
 .card-content {
     position: absolute; /* Position the content absolutely inside the card */
     bottom: 0; /* Stick the content to the bottom of the card */
     left: 0; /* Align the content to the left of the card */
     right: 0; /* Align the content to the right of the card */
     background: rgba(0, 0, 0, 0.6); /* Semi-transparent background for readability */
-    border-bottom-left-radius: 8px; /* Round the bottom left corner */
-    border-bottom-right-radius: 8px; /* Round the bottom right corner */
+    border-bottom-left-radius: 6px; /* Round the bottom left corner */
+    border-bottom-right-radius: 6px; /* Round the bottom right corner */
     color: white; /* Set the text color to white */
     display: flex; /* Use flexbox to align items inside the content area */
     justify-content: center; /* Center the content horizontally */
     align-items: center; /* Center the content vertically */
     height: 30px; /* Set a fixed height for the content area */
+    -width: 100%;
 }
 
-a {
-    color: black;
+/* Flip Button */
+.flip-btn {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0px 0px 0px 50px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    z-index: 2;
+    font-size: 20px;
+    text-indent: 10px;
+    padding: 0px;
+    margin: 0px
 }
 
-/* Card title styling */
+.flip-btn:hover {
+    background: #0056b3;
+}
+
+.card-description h4 {
+    /* font-size: 14px; */
+    margin: 0px 0px 5px;
+    white-space: normal; /* Allow text to wrap to the next line */
+    overflow-wrap: break-word; /* Ensure wrapping of long words */
+    word-wrap: break-word; /* Break words that are too long to fit */
+    width: 130px; /* Width of the paragraph container */
+    line-height: 1; /* Line height for readability */
+    color: #000;
+}
+
+p {
+    font-size: 14px; /* Adjust the font size as per your design */
+    color: white; /* Text color */
+    width: 130px; /* Width of the paragraph container */
+    word-wrap: break-word; /* Break words that are too long to fit */
+    overflow-wrap: break-word; /* Ensure wrapping of long words */
+    white-space: normal; /* Allow text to wrap to the next line */
+    text-align: center; /* Center-align the text */
+    line-height: 1.2; /* Line height for readability */
+    margin: 0 auto; /* Center the paragraph horizontally within the card */
+    font-weight: 400;
+}
+
+
 .card-title {
-    font-size: 1em; /* Set font size for the card title */
-    margin: 0; /* Remove margin to ensure title fits within the content area */
-    text-align: center; /* Center the text horizontally */
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+    margin: 0%;
+}
+
+.card-image {
+    width: 150px;
+    height: 230px;
+    object-fit: cover;
+    image-rendering: auto; /* Prevent image blurring */
 }
 
 /* Floating footer */
-.footer {
+.main-footer {
     position: fixed;         /* Fixes the footer */
-    bottom: 10px;            /* Positions it 10px from the bottom */
+    bottom: 0px;            /* Positions it 10px from the bottom */
     right: 10px;             /* Positions it 10px from the right */
     background: none;
     color: black;            /* Footer text color */
@@ -204,6 +290,7 @@ a {
 .wrapper .icon {
     position: relative;
     background: white;
+    color: #000;
     border-radius: 50%;
     padding: 8px; /* For space around the icon */
     margin: 5px;
@@ -356,7 +443,7 @@ button:hover {
 
 .game-classifier {
     overflow-y: auto;
-    margin: 15px 0px;
+    margin: 10px 0px;
     top: 65px;
     padding-bottom: 42px;
 
@@ -371,9 +458,10 @@ button:hover {
         width: 7px;    }
 }
 
-.game-classifier > div > h2 {
-    color: antiquewhite;
+.game-classifier div > h2 {
+    color: white;
     padding: 0%;
-    margin: 0px 0px 0px 30px;
+    margin: 0px 30px;
     border-radius: 5px;
+    width: fit-content;
 }
