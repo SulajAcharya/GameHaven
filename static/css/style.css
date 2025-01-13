@@ -345,7 +345,7 @@ nav {
 }
 
 .wrapper .icon:hover .tooltip {
-    top: -45px;
+    top: -40px;
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
