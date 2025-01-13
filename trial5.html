@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Website</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .card {
+    width: 150px; /* Set width of the card */
+    height: 230px; /* Set height of the card */
+    background-color: white; /* Set background color of the card */
+    border-radius: 10px; /* Round the corners of the card */
+    margin: 3px 10px; /* Add space between the cards */
+    transition: transform 0.3s ease; /* Add smooth scaling transition */
+    transform-origin: center; /* Scale the card from the center */
+    position: relative; /* Ensure the card content stays inside the card */
+}
+
+/* Card hover effect for scaling */
+.card:hover {
+    transform: scale(1.05); /* Scale the card by 1.15 times on hover */
+    border: 2px solid rgb(160, 32, 240);
+}
+
+/* Card image styling */
+.card-image {
+    width: 100%; /* Make the image fill the full width of the card */
+    height: 100%; /* Make the image fill the full height of the card */
+    object-fit: cover; /* Ensure the image covers the card area without distortion */
+    border-radius: 8px; /* Round the corners of the image */
+}
+
+/* Card content styling */
+.card-content {
+    position: absolute; /* Position the content absolutely inside the card */
+    bottom: 0; /* Stick the content to the bottom of the card */
+    left: 0; /* Align the content to the left of the card */
+    right: 0; /* Align the content to the right of the card */
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background for readability */
+    border-bottom-left-radius: 8px; /* Round the bottom left corner */
+    border-bottom-right-radius: 8px; /* Round the bottom right corner */
+    color: white; /* Set the text color to white */
+    display: flex; /* Use flexbox to align items inside the content area */
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    height: 30px; /* Set a fixed height for the content area */
+}
+
+a {
+    color: black;
+}
+
+/* Card title styling */
+.card-title {
+    font-size: 1em; /* Set font size for the card title */
+    margin: 0; /* Remove margin to ensure title fits within the content area */
+    text-align: center; /* Center the text horizontally */
+}
+    </style>
+</head>
+
+<body>
+    <header>
+        {% include 'navbar.html' %}
+    </header>
+
+    <main>
+        <div class="home-main-container" style="display: flex;">
+            <div class="sidebar-games">
+                <ul>
+                    <li><a href="#tic_tac_toe">Tic Tac Toe</a></li>
+                    <li><a href="#chess">Chess</a></li>
+                    <li><a href="#memory_game">Memory Game</a></li>
+                    <li><a href="#snake_and_ladder">Snake & Ladder</a></li>
+                    <li><a href="#ludo">Ludo</a></li>
+                    <li><a href="#maze_game">Maze Game</a></li>
+                    <li><a href="#balloon_popper">Balloon Popper</a></li>
+                    <li><a href="#minesweeper">Minesweeper</a></li>
+                    <li><a href="#pacman">Pacman</a></li>
+                    <li><a href="#whack_a_mole">Whack A Mole</a></li>
+                    <li><a href="#tetris">Tetris</a></li>
+                    <li><a href="#bubble_shooter">Bubble Shooter</a></li>
+                    <li><a href="#snake_game">Snake Game</a></li>
+                    <li><a href="">CardTitle</a></li>
+                    <li><a href="">CardTitle</a></li>
+                    <li><a href="">CardTitle</a></li>
+                    <li><a href="">CardTitle</a></li>
+                    <li><a href="">CardTitle</a></li>
+                    <li><a href="">CardTitle</a></li>
+                </ul>
+            </div>
+            <div class="game-classifier">
+                <div>
+                    <h2>All Games</h2>
+                    <div class="game-cont">
+                        <!-- Each card is wrapped in a .card-wrapper to handle the scale overflow -->
+                        <div class="card-wrapper" id="tic_tac_toe">
+                            <a href="{{ url_for('show_page', page_name='tictactoe') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/tictactoe.jpg') }}" alt="Tic Tac Toe"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Tic Tac Toe</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="chess">
+                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/chess.jpg') }}" alt="Chess Game"
+                                        class="card-image" loading="lazy">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Chess</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Repeat for other cards -->
+                        <div class="card-wrapper" id="memory_game">
+                            <a href="{{ url_for('show_page', page_name='memory_game') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/memorygame.jpg') }}" alt="Memory Game"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Memory Game</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="snake_and_ladder">
+                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/snake&ladder.jpg') }}" alt="Snake & Ladder"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Snake & Ladder</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="ludo">
+                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/ludo.webp') }}" alt="Ludo"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Ludo</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="maze_game">
+                            <a href="{{ url_for('show_page', page_name='mazegame') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/mazegame.jpg') }}" alt="Maze Game"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Maze Game</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="balloon_popper">
+                            <a href="{{ url_for('show_page', page_name='balloon_popper') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/balloonpopper.jpg') }}" alt="Balloon Popper"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Balloon Popper</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="minesweeper">
+                            <a href="{{ url_for('show_page', page_name='minesweeper') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/minesweeper.jpg') }}" alt="Minesweeper"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Minesweeper</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="pacman">
+                            <a href="{{ url_for('show_page', page_name='pacmanclone') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/pacmanclone.jpg') }}" alt="Pacman"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Pacman</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="whack_a_mole">
+                            <a href="{{ url_for('show_page', page_name='whack_a_mole') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/whackamole.jpg') }}" alt="Whack A Mole"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Whack A Mole</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="tetris">
+                            <a href="{{ url_for('show_page', page_name='tetris') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/tetris.jpg') }}" alt="Tetris"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Tetris</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="bubble_shooter">
+                            <a href="{{ url_for('show_page', page_name='bubble_shooter') }}" class="card-link" target="_blank">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/bubbleshooter.webp') }}"
+                                        alt="Bubble Shooter" class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Bubble Shooter</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="snake_game">
+                            <a href="{{ url_for('show_page', page_name='snake_game') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/snakegame.webp') }}" alt="Snake Game"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Snake Game</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper">
+                            <a href="{{ url_for('show_page', page_name='sudoku') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/sudoku.webp') }}" alt="Sudoku"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Sudoku</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper">
+                            <a href="{{ url_for('show_page', page_name='trail') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/image.jpg') }}" alt="Chess"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Trail</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper">
+                            <a href="{{ url_for('show_page', page_name='tower_blocks') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/towerblocks.webp') }}" alt="Tower Blocks"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Tower Blocks</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper">
+                            <a href="{{ url_for('show_page', page_name='flappy_bird') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/flappybird.webp') }}" alt="Flappy Bird"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Flappy Bird</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2>Top Games</h2>
+                    <div class="game-cont">
+                        <!-- Each card is wrapped in a .card-wrapper to handle the scale overflow -->
+                        <div class="card-wrapper" id="tic_tac_toe">
+                            <a href="{{ url_for('show_page', page_name='tictactoe') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/tictactoe.jpg') }}" alt="Tic Tac Toe"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Tic Tac Toe</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="chess">
+                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/chess.jpg') }}" alt="Chess Game"
+                                        class="card-image" loading="lazy">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Chess</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Repeat for other cards -->
+                        <div class="card-wrapper" id="memory_game">
+                            <a href="{{ url_for('show_page', page_name='memory_game') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/memorygame.jpg') }}" alt="Memory Game"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Memory Game</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="snake_and_ladder">
+                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/snake&ladder.jpg') }}" alt="Snake & Ladder"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Snake & Ladder</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="ludo">
+                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/ludo.webp') }}" alt="Ludo"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Ludo</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="maze_game">
+                            <a href="{{ url_for('show_page', page_name='mazegame') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/mazegame.jpg') }}" alt="Maze Game"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Maze Game</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="balloon_popper">
+                            <a href="{{ url_for('show_page', page_name='balloon_popper') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/balloonpopper.jpg') }}" alt="Balloon Popper"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Balloon Popper</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2>Classic Games</h2>
+                    <div class="game-cont">
+                        <!-- Each card is wrapped in a .card-wrapper to handle the scale overflow -->
+                        <div class="card-wrapper" id="tic_tac_toe">
+                            <a href="{{ url_for('show_page', page_name='tictactoe') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/tictactoe.jpg') }}" alt="Tic Tac Toe"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Tic Tac Toe</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="chess">
+                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/chess.jpg') }}" alt="Chess Game"
+                                        class="card-image" loading="lazy">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Chess</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="snake_and_ladder">
+                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/snake&ladder.jpg') }}" alt="Snake & Ladder"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Snake & Ladder</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="ludo">
+                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/ludo.webp') }}" alt="Ludo"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Ludo</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="pacman">
+                            <a href="{{ url_for('show_page', page_name='pacmanclone') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/pacmanclone.jpg') }}" alt="Pacman"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Pacman</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="tetris">
+                            <a href="{{ url_for('show_page', page_name='tetris') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/tetris.jpg') }}" alt="Tetris"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Tetris</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2>Kids Games</h2>
+                    <div class="game-cont">
+                        <!-- Each card is wrapped in a .card-wrapper to handle the scale overflow -->
+                        <div class="card-wrapper" id="tic_tac_toe">
+                            <a href="{{ url_for('show_page', page_name='tictactoe') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/tictactoe.jpg') }}" alt="Tic Tac Toe"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Tic Tac Toe</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="chess">
+                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/chess.jpg') }}" alt="Chess Game"
+                                        class="card-image" loading="lazy">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Chess</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Repeat for other cards -->
+                        <div class="card-wrapper" id="memory_game">
+                            <a href="{{ url_for('show_page', page_name='memory_game') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/memorygame.jpg') }}" alt="Memory Game"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Memory Game</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="snake_and_ladder">
+                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/snake&ladder.jpg') }}" alt="Snake & Ladder"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Snake & Ladder</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="ludo">
+                            <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/ludo.webp') }}" alt="Ludo"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Ludo</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="maze_game">
+                            <a href="{{ url_for('show_page', page_name='mazegame') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/mazegame.jpg') }}" alt="Maze Game"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Maze Game</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="balloon_popper">
+                            <a href="{{ url_for('show_page', page_name='balloon_popper') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/balloonpopper.jpg') }}" alt="Balloon Popper"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Balloon Popper</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2>Puzzle & Brain Games</h2>
+                    <div class="game-cont">
+                        <!-- Each card is wrapped in a .card-wrapper to handle the scale overflow -->
+                        <div class="card-wrapper" id="memory_game">
+                            <a href="{{ url_for('show_page', page_name='memory_game') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/memorygame.jpg') }}" alt="Memory Game"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Memory Game</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="minesweeper">
+                            <a href="{{ url_for('show_page', page_name='minesweeper') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/minesweeper.jpg') }}" alt="Minesweeper"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Minesweeper</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper">
+                            <a href="{{ url_for('show_page', page_name='sudoku') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/sudoku.webp') }}" alt="Sudoku"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Sudoku</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="maze_game">
+                            <a href="{{ url_for('show_page', page_name='mazegame') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/mazegame.jpg') }}" alt="Maze Game"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Maze Game</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2>Arcade & Action Games</h2>
+                    <div class="game-cont">
+                        <div class="card-wrapper">
+                            <a href="{{ url_for('show_page', page_name='flappy_bird') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/flappybird.webp') }}" alt="Flappy Bird"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Flappy Bird</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="snake_game">
+                            <a href="{{ url_for('show_page', page_name='snake_game') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/snakegame.webp') }}" alt="Snake Game"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Snake Game</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-wrapper" id="whack_a_mole">
+                            <a href="{{ url_for('show_page', page_name='whack_a_mole') }}" class="card-link">
+                                <div class="card">
+                                    <img src="{{ url_for('static', filename='images/whackamole.jpg') }}" alt="Whack A Mole"
+                                        class="card-image">
+                                    <div class="card-content">
+                                        <h3 class="card-title">Whack A Mole</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <footer>
+        <!-- Floating Footer -->
+        <div class="footer">
+            <ul class="wrapper">
+                <a href="https://github.com/SulajAcharya">
+                    <li class="icon github">
+                        <span class="tooltip">Github</span> <!-- Same name displayed in hover -->
+                        <span><i class="fa-brands fa-github"></i></span>
+                    </li>
+                </a>
+                <a href="https://www.linkedin.com/in/sulajacharya/">
+                    <li class="icon linkedin">
+                        <span class="tooltip">Linkedin</span>
+                        <span><i class="fa-brands fa-linkedin-in"></i></span>
+                    </li>
+                </a>
+                <a href="https://www.facebook.com/sulaj.acharya" target="_blank">
+                    <li class="icon facebook">
+                        <span class="tooltip">Facebook</span>
+                        <span><i class="fab fa-facebook-f"></i></span>
+                    </li>
+                </a>
+                <a href="" target="_blank">
+                    <li class="icon instagram">
+                        <span class="tooltip">Instagram</span>
+                        <span><i class="fab fa-instagram"></i></span>
+                    </li>
+                </a>
+                <a href="https://wa.me/917678019930" target="_blank">
+                    <li class="icon whatsapp">
+                        <span class="tooltip">WhatsApp</span> <!--https://wa.me/917678019930-->
+                        <span><i class="fa-brands fa-whatsapp"></i></span>
+                    </li>
+                </a>
+
+            </ul>
+        </div>
+    </footer>
+
+</body>
+
+</html>

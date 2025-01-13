@@ -135,7 +135,7 @@ nav {
     height: 230px;
     position: relative;
     margin: 6px;
-    border: 1px solid #ddd;
+    border: 2px solid #ddd;
     overflow: hidden;
     background-color: purple;
     border-radius: 8px;
@@ -144,8 +144,7 @@ nav {
 .flip-card:hover {
     transform: scale(1.05);
     transition: transform 0.3s ease, box-shadow 0.2s ease-in-out;
-    border-color: #0056b3;
-    border: 2px solid #0056b3;
+    border: 3px solid #0056b3;
 }
 
 .flip-card-inner {
@@ -204,7 +203,7 @@ nav {
     justify-content: center; /* Center the content horizontally */
     align-items: center; /* Center the content vertically */
     height: 30px; /* Set a fixed height for the content area */
-    -width: 100%;
+    width: 100%;
 }
 
 /* Flip Button */
@@ -214,7 +213,8 @@ nav {
     right: 0px;
     background: #007bff;
     color: white;
-    border: none;
+    border-left: 2px solid white;
+    border-bottom: 2px solid white;
     border-radius: 0px 0px 0px 50px;
     width: 35px;
     height: 35px;
@@ -228,6 +228,16 @@ nav {
 
 .flip-btn:hover {
     background: #0056b3;
+    /* /* border-left: 3px solid #fff; */
+    /* border-bottom: 3px solid white; */
+}
+
+.card-description {
+    height: 200;
+    overflow: hidden;
+    padding-top: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 .card-description h4 {
@@ -239,19 +249,21 @@ nav {
     width: 130px; /* Width of the paragraph container */
     line-height: 1; /* Line height for readability */
     color: #000;
+    max-height: 32px;
 }
 
-p {
+.card-description p {
     font-size: 14px; /* Adjust the font size as per your design */
     color: white; /* Text color */
-    width: 130px; /* Width of the paragraph container */
+    width: 132px; /* Width of the paragraph container */
     word-wrap: break-word; /* Break words that are too long to fit */
     overflow-wrap: break-word; /* Ensure wrapping of long words */
     white-space: normal; /* Allow text to wrap to the next line */
     text-align: center; /* Center-align the text */
-    line-height: 1.2; /* Line height for readability */
+    line-height: 1.1; /* Line height for readability */
     margin: 0 auto; /* Center the paragraph horizontally within the card */
     font-weight: 400;
+    max-height: 154px;
 }
 
 
@@ -445,7 +457,7 @@ button:hover {
     overflow-y: auto;
     margin: 10px 0px;
     top: 65px;
-    padding-bottom: 42px;
+    padding-bottom: 27px;
 
     &::-webkit-scrollbar-thumb {
         background-color: #555;
@@ -464,4 +476,8 @@ button:hover {
     margin: 0px 30px;
     border-radius: 5px;
     width: fit-content;
+}
+
+.classifier-cont {
+    margin: 0px 0px 15px;
 }
