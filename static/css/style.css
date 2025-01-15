@@ -466,10 +466,15 @@ button:hover {
 
     &::-webkit-scrollbar {
         background-color: #111;
-        width: 7px;    }
+        width: 7px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover{
+        background-color: #bbb;
+    }
 }
 
-.game-classifier div > h2 {
+.game-classifier .classifier-cont > h2 {
     color: white;
     padding: 0%;
     margin: 0px 30px;
@@ -480,3 +485,12 @@ button:hover {
 .classifier-cont {
     margin: 0px 0px 15px;
 }
+
+/* .flip-card-front > .top_hash {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding: 5px;
+    margin: 0px;
+    background-color: red;
+} */

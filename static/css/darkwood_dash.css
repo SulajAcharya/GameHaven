@@ -6,6 +6,33 @@ body {
 	font-family: "Anton", sans-serif;
 }
 
+header {
+	color: #00ffdd;
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	z-index: 10000;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.bub-nav {
+	background-color: #2588eb;
+	border: 2px solid white;
+	border-radius: 10px;
+	padding: 10px 20px;
+
+	:hover {
+		color: #000;
+		text-decoration: underline;
+		text-underline-offset: 5px;
+	}
+}
+
+.bub-nav a {
+	text-decoration: none;
+	color: #fff;
+}
+
 #gameContainer {
 	position: relative;
 	width: 100%;
