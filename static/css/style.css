@@ -11,8 +11,8 @@ body {
 }
 
 main {
-    padding-top: 50px;
     height: calc(100vh - 50px); /* Set the height of the main content area */
+    padding-top: 50px;
 }
 
 .home-main-container {
@@ -22,12 +22,11 @@ main {
 .sidebar-games {
     border-right: 1px solid #FFFFFF;
     height: calc(100vh - 50px);
-    
 }
 
 .sidebar-games > ul {
     padding: 0%;
-    width: 150px;
+    width: 200px;
 }
 
 .sidebar-games > ul > li {
@@ -104,7 +103,7 @@ nav {
     -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
     position: relative;
     height: fit-content;
-    width: calc(100vw - 180px);
+    width: calc(100vw - 225px);
     padding: 0%;
 }
 
