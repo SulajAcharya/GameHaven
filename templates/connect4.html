@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect4</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: black;
+            color: black;
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+        }
+
+        .game_cont {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .info_cont {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: fit-content;
+            align-items: center;
+        }
+
+        .score_cont {
+            max-width: 300px;
+        }
+
+        .rules_cont {
+            max-width: 430px;
+            min-width: 300px;
+        }
+
+        .score_cont, .rules_cont {
+            /* width: 300px; */
+            background-color: #2588eb;
+            height: fit-content;
+            border-radius: 30px;
+            position: relative;
+            padding: 20px;
+            border: 2px solid white;
+            width: 100%;
+
+        }
+
+        #reset, #restart {
+            padding: 5px 10px;
+            background-color: #4a4ac6;
+            border-radius: 5px;
+            color: white;
+            border: 2px solid white;
+            
+            &:hover {
+                background-color: #2588eb;
+            }
+        }
+
+        #whosturn {
+            font-size: 25px;
+            text-align: center;
+            color: black;
+        }
+
+        h1 {
+            color: white;
+            font-size: 35px;
+        }
+
+        h2 {
+            text-align: center;
+            font-weight: 300;
+            font-size: 30px;
+            color: white;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            border: 2px solid white;
+            border-radius: 20px;
+            width: fit-content;
+            background-color: #4a4ac6;
+            height: fit-content;
+            overflow: hidden;
+        }
+
+        .column {
+            display: grid;
+            place-items: center;
+        }
+
+        .column p {
+            margin: 5px;
+            width: 75px;
+            height: 75px;
+            border: 2px solid black;
+            border-radius: 100px;
+            background-color: white;
+        }
+
+        .column:hover {
+            cursor: pointer;
+            background-color: rgb(98, 136, 238);
+        }
+
+        @media(max-width:700px) {
+            .board {
+                width: 500px;
+            }
+
+            .column p {
+                width: 55px;
+                height: 55px;
+            }
+        }
+
+        @media(max-width:520px) {
+            .board {
+                width: 400px;
+            }
+
+            .column p {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @media(max-width:420px) {
+            .board {
+                width: 320px;
+            }
+
+            .column p {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        ul.rules-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul.rules-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        ul.rules-list li .emoji {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        ul.rules-list li .content {
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+
+        #redScore , #yellowScore {
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        {% include 'navbar.html' %}
+    </header>
+
+    <main>
+        <h1>Connect 4</h1>
+        <div class="game_cont">
+            <div class="board">
+                <ul class="column" id="c1">
+                    <p id="c1r6"></p>
+                    <p id="c1r5"></p>
+                    <p id="c1r4"></p>
+                    <p id="c1r3"></p>
+                    <p id="c1r2"></p>
+                    <p id="c1r1"></p>
+                </ul>
+                <ul class="column" id="c2">
+                    <p id="c2r6"></p>
+                    <p id="c2r5"></p>
+                    <p id="c2r4"></p>
+                    <p id="c2r3"></p>
+                    <p id="c2r2"></p>
+                    <p id="c2r1"></p>
+                </ul>
+                <ul class="column" id="c3">
+                    <p id="c3r6"></p>
+                    <p id="c3r5"></p>
+                    <p id="c3r4"></p>
+                    <p id="c3r3"></p>
+                    <p id="c3r2"></p>
+                    <p id="c3r1"></p>
+                </ul>
+                <ul class="column" id="c4">
+                    <p id="c4r6"></p>
+                    <p id="c4r5"></p>
+                    <p id="c4r4"></p>
+                    <p id="c4r3"></p>
+                    <p id="c4r2"></p>
+                    <p id="c4r1"></p>
+                </ul>
+                <ul class="column" id="c5">
+                    <p id="c5r6"></p>
+                    <p id="c5r5"></p>
+                    <p id="c5r4"></p>
+                    <p id="c5r3"></p>
+                    <p id="c5r2"></p>
+                    <p id="c5r1"></p>
+                </ul>
+                <ul class="column" id="c6">
+                    <p id="c6r6"></p>
+                    <p id="c6r5"></p>
+                    <p id="c6r4"></p>
+                    <p id="c6r3"></p>
+                    <p id="c6r2"></p>
+                    <p id="c6r1"></p>
+                </ul>
+                <ul class="column" id="c7">
+                    <p id="c7r6"></p>
+                    <p id="c7r5"></p>
+                    <p id="c7r4"></p>
+                    <p id="c7r3"></p>
+                    <p id="c7r2"></p>
+                    <p id="c7r1"></p>
+                </ul>
+            </div>
+            <div class="info_cont">
+                <div class="score_cont">
+                    <h2>Scoreboard</h2>
+                    <p id="whosturn">Red's Turn</p>
+                    <p id="redScore">Red's Score: 0</p>
+                    <p id="yellowScore">Yellow's Score: 0</p>
+                    
+                    <div style="display: flex; justify-content: space-around;">
+                        <button id="reset">Reset Board</button>
+                        <button id="restart">Restart Game</button>
+                    </div>
+                </div>
+                <div class="rules_cont">
+                    <h2>Rules</h2>
+                    <ul class="rules-list">
+                        <li>
+                            <span class="emoji">🎮</span>
+                            <span class="content">Each player gets discs of one color (🟥 or 🟨).</span>
+                        </li>
+                        <li>
+                            <span class="emoji">🎯</span>
+                            <span class="content">Be the first to connect 4 discs in a line - horizontally, vertically, or diagonally!</span>
+                        </li>
+                        <li>
+                            <span class="emoji">🔄</span>
+                            <span class="content">Take turns dropping one disc into any column of your choice.</span>
+                        </li>
+                        <li>
+                            <span class="emoji">⚡</span>
+                            <span class="content">Discs always stack at the lowest available space in the column.</span>
+                        </li>
+                        <li>
+                            <span class="emoji">🎉</span>
+                            <span class="content">The first player to connect 4 in a row wins the game!</span>
+                        </li>
+                        <li>
+                            <span class="emoji">🤝</span>
+                            <span class="content">If the grid fills completely and no one connects 4, the game ends in a tie.</span>
+                        </li>
+                        <li>
+                            <span class="emoji">🤓</span>
+                            <span class="content">Plan ahead and block your opponent while setting up your winning move!</span>
+                        </li>
+                    </ul>
+                    <p style="text-align: center; font-size: 20px;">Let the fun begin! 🚀</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        let val_c1 = 1;
+        let val_c2 = 1;
+        let val_c3 = 1;
+        let val_c4 = 1;
+        let val_c5 = 1;
+        let val_c6 = 1;
+        let val_c7 = 1;
+        let turn = 1;
+        let redWins = 0;
+        let yellowWins = 0;
+        let currentPlayer = "red"; // Red starts the first game
+        let lastStartingPlayer = "red"; // To track who started last game
+
+        // Function to update the score and whose turn it is
+        function updateScore() {
+            document.getElementById("redScore").innerText = `Red's Score: ${redWins}`;
+            document.getElementById("yellowScore").innerText = `Yellow's Score: ${yellowWins}`;
+            document.getElementById("whosturn").innerText = `${currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)}'s Turn`;
+        }
+
+        // Checking the winner
+        function check(player) {
+            setTimeout(() => {
+                // Check horizontal
+                for (i = 1; i <= 7; i++) {
+                    for (j = 1; j <= 3; j++) {
+                        if (document.getElementById(`c${i}r${j}`).style.backgroundColor == `${player}` &&
+                            document.getElementById(`c${i}r${j + 1}`).style.backgroundColor == `${player}` &&
+                            document.getElementById(`c${i}r${j + 2}`).style.backgroundColor == `${player}` &&
+                            document.getElementById(`c${i}r${j + 3}`).style.backgroundColor == `${player}`) {
+                            alert(`${player} wins`);
+                            if (player == "red") {
+                                redWins++;
+                            } else {
+                                yellowWins++;
+                            }
+                            updateScore();
+                            resetGame();
+                        }
+                    }
+                }
+
+                // Check vertical
+                for (i = 1; i <= 6; i++) {
+                    for (j = 1; j <= 4; j++) {
+                        if (document.getElementById(`c${j}r${i}`).style.backgroundColor == `${player}` &&
+                            document.getElementById(`c${j + 1}r${i}`).style.backgroundColor == `${player}` &&
+                            document.getElementById(`c${j + 2}r${i}`).style.backgroundColor == `${player}` &&
+                            document.getElementById(`c${j + 3}r${i}`).style.backgroundColor == `${player}`) {
+                            alert(`${player} wins`);
+                            if (player == "red") {
+                                redWins++;
+                            } else {
+                                yellowWins++;
+                            }
+                            updateScore();
+                            resetGame();
+                        }
+                    }
+                }
+
+                // Check diagonal /
+                for (i = 1; i <= 4; i++) {
+                    for (j = 1; j <= 3; j++) {
+                        if (document.getElementById(`c${i}r${j}`).style.backgroundColor == `${player}` &&
+                            document.getElementById(`c${i + 1}r${j + 1}`).style.backgroundColor == `${player}` &&
+                            document.getElementById(`c${i + 2}r${j + 2}`).style.backgroundColor == `${player}` &&
+                            document.getElementById(`c${i + 3}r${j + 3}`).style.backgroundColor == `${player}`) {
+                            alert(`${player} wins`);
+                            if (player == "red") {
+                                redWins++;
+                            } else {
+                                yellowWins++;
+                            }
+                            updateScore();
+                            resetGame();
+                        }
+                    }
+                }
+
+                // Check diagonal \
+                for (i = 1; i <= 4; i++) {
+                    for (j = 6; j >= 4; j--) {
+                        if (document.getElementById(`c${i}r${j}`).style.backgroundColor == `${player}` &&
+                            document.getElementById(`c${i + 1}r${j - 1}`).style.backgroundColor == `${player}` &&
+                            document.getElementById(`c${i + 2}r${j - 2}`).style.backgroundColor == `${player}` &&
+                            document.getElementById(`c${i + 3}r${j - 3}`).style.backgroundColor == `${player}`) {
+                            alert(`${player} wins`);
+                            if (player == "red") {
+                                redWins++;
+                            } else {
+                                yellowWins++;
+                            }
+                            updateScore();
+                            resetGame();
+                        }
+                    }
+                }
+            }, 200);
+        }
+
+        // Reset the game and start a new round
+        function resetGame() {
+            // Reset column values
+            val_c1 = 1;
+            val_c2 = 1;
+            val_c3 = 1;
+            val_c4 = 1;
+            val_c5 = 1;
+            val_c6 = 1;
+            val_c7 = 1;
+
+            // Clear all the cells
+            for (let i = 1; i <= 7; i++) {
+                for (let j = 1; j <= 6; j++) {
+                    document.getElementById(`c${i}r${j}`).style.backgroundColor = "white";
+                }
+            }
+
+            // Alternate the starting player
+            currentPlayer = (lastStartingPlayer == "red") ? "yellow" : "red";
+            lastStartingPlayer = currentPlayer; // Update the last starting player for the next round
+
+            updateScore();
+        }
+
+        // Playing the game
+        document.querySelectorAll(".column").forEach((e) => {
+            e.addEventListener("click", () => {
+                let sum = eval(`val_${e.id}`);
+                eval(`val_${e.id}++`);
+
+                if (sum <= 6) {
+                    if (currentPlayer == "red") {
+                        document.getElementById(`${e.id}r${sum}`).style.backgroundColor = "red";
+                        turn++;
+                        check('red');
+                        currentPlayer = "yellow";  // Switch player after red's turn
+                    } else {
+                        document.getElementById(`${e.id}r${sum}`).style.backgroundColor = "yellow";
+                        turn++;
+                        check('yellow');
+                        currentPlayer = "red";  // Switch player after yellow's turn
+                    }
+                    updateScore();
+                }
+            });
+        });
+
+        // Initialize score and turn
+        updateScore();
+
+        // Reset board confirmation
+        document.getElementById("reset").addEventListener("click", () => {
+            if (confirm("Are you sure you want to reset the board? The scores will remain the same, only the board will be reset.")) {
+                resetGameBoard();
+            }
+        });
+
+        // Restart game confirmation
+        document.getElementById("restart").addEventListener("click", () => {
+            if (confirm("Are you sure you want to restart the game? The board and scores will reset.")) {
+                resetGame();
+            }
+        });
+
+        // Reset the board only
+        function resetGameBoard() {
+            // Reset column values
+            val_c1 = 1;
+            val_c2 = 1;
+            val_c3 = 1;
+            val_c4 = 1;
+            val_c5 = 1;
+            val_c6 = 1;
+            val_c7 = 1;
+
+            // Clear all the cells
+            for (let i = 1; i <= 7; i++) {
+                for (let j = 1; j <= 6; j++) {
+                    document.getElementById(`c${i}r${j}`).style.backgroundColor = "white";
+                }
+            }
+
+            updateScore();
+        }
+
+    </script>
+</body>
+</html>

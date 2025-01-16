@@ -212,6 +212,8 @@ nav {
     right: 0px;
     background: #007bff;
     color: white;
+    border-top: none;
+    border-right: none;
     border-left: 2px solid white;
     border-bottom: 2px solid white;
     border-radius: 0px 0px 0px 50px;
@@ -222,7 +224,6 @@ nav {
     font-size: 20px;
     text-indent: 10px;
     padding: 0px;
-    margin: 0px
 }
 
 .flip-btn:hover {
@@ -430,7 +431,7 @@ textarea {
     resize: vertical;
 } */
 
-button {
+/* button {
     background-color: #28a745;
     color: white;
     border: none;
@@ -441,7 +442,7 @@ button {
 
 button:hover {
     background-color: #218838;
-}
+} */
 
 @media (max-width: 768px) {
     .sidebar-games {

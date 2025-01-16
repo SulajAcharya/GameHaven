@@ -138,6 +138,35 @@
                             </div>
                         </div>
 
+                        <div class="card-wrapper" id="connect4">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <!-- Front Side -->
+                                    <div class="flip-card-front" style="margin: 0px;">
+                                        <a href="{{ url_for('show_page', page_name='connect4') }}" class="card-link">
+                                            <div class="card-internal">
+                                                <img src="{{ url_for('static', filename='images/connect4.webp') }}"
+                                                    alt="Connect4" class="card-image" loading="lazy">
+                                                <div class="card-content">
+                                                    <h3 class="card-title">Connect4</h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="flip-card-back">
+                                        <div class="card-description">
+                                            <h4>About Connect4</h4>
+                                            <p>
+                                                Strategy meets excitement! Drop discs, aim for 4 in a row—horizontally, vertically, or diagonally! Compete with friends or challenge AI for endless fun! Who will connect first? 🎮
+                                            </div>
+                                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="card-wrapper" id="darkwood_dash">
                             <div class="flip-card">
                                 <div class="flip-card-inner">
