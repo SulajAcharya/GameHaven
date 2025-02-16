@@ -3,194 +3,693 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feedback Form</title>
-  <!-- <link rel="stylesheet" href="styles.css"> -->
-   <style>
-    /* General Styles */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  <title>Document</title>
+
+  <style>
+    .classifier-cont {
+    overflow: hidden; /* Prevent vertical overflow */
+    position: relative;
+    width: 100%;
+    height: auto;
 }
 
-.feedback-container {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 600px;
+.game-scroll {
+    display: flex;
+    overflow-x: hidden; /* Hide horizontal overflow */
+    overflow-y: hidden; /* Prevent vertical scrolling */
+    position: relative;
 }
 
-h1 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
+.game-cont {
+    display: flex;
+    transition: transform ease-in-out; /* Smooth scroll */
+    white-space: nowrap; /* Ensure content stays on one line */
 }
 
-p {
-  text-align: center;
-  color: #666;
-  margin-bottom: 30px;
+.card-wrapper {
+    flex: 0 0 auto; /* Prevent shrinking */
+    margin: 0 10px; /* Optional spacing between cards */
+    width: 300px; /* Adjust as needed */
+    height: 400px; /* Adjust as needed */
+    position: relative;
+    overflow: hidden;
 }
 
-.feedback-section {
-  margin-bottom: 30px;
-}
-
-h2 {
-  color: #444;
-  margin-bottom: 15px;
-  font-size: 1.5em;
-}
-
-label {
-  display: block;
-  margin-bottom: 8px;
-  color: #555;
-  font-weight: bold;
-}
-
-select, textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1em;
-}
-
-textarea {
-  resize: vertical;
-}
-
-.submit-btn {
-  background-color: #5cb85c;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1.1em;
-  width: 100%;
-}
-
-.submit-btn:hover {
-  background-color: #4cae4c;
-}
-   </style>
+  </style>
 </head>
 <body>
-  <div class="feedback-container">
-    <h1>Feedback Form</h1>
-    <p>We value your feedback! Please take a moment to share your thoughts.</p>
+  <div class="classifier-cont">
+    <h2>All Games</h2>
+    <div class="game-scroll">
+      <div class="game-cont">
+        <!-- Each card is wrapped in a .card-wrapper to handle the scale overflow -->
+        <div class="card-wrapper" id="balloon_popper">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" title="Click to Play" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='balloon_popper') }}"
+                            class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/balloonpopper.jpg') }}"
+                                    alt="Balloon Popper" class="card-image">
+                                <div class="card-content">
+                                    <h3 class="card-title">Balloon Popper</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Balloon Popper</h3>
+                            <p>
+                                Get ready to pop colorful balloons as they rise! 🎉 Tap quickly and test your reflexes to burst them before they float away. Enjoy endless fun and challenge yourself for the highest score!
+                            </p>
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- General Website Feedback -->
-    <div class="feedback-section">
-      <h2>General Website Feedback</h2>
-      <form>
-        <label for="overall-rating">Overall Experience:</label>
-        <select id="overall-rating" name="overall-rating">
-          <option value="5">Excellent</option>
-          <option value="4">Good</option>
-          <option value="3">Average</option>
-          <option value="2">Poor</option>
-          <option value="1">Very Poor</option>
-        </select>
+        <div class="card-wrapper" id="bubble_shooter">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='bubble_shooter') }}" class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/bubbleshooter.webp') }}"
+                                    alt="Bubble Shooter" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Bubble Shooter</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Bubble Shooter</h4>
+                            <p>
+                                Dodge and burst bubbles popping from every side! 🎮 Use the joystick to move quickly. Test your reflexes in this fast-paced game as bubbles close in from all directions. Beat the high score!
+                            </p>
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <label for="likes">What do you like most about the website?</label>
-        <textarea id="likes" name="likes" rows="3"></textarea>
+        <div class="card-wrapper" id="chess">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='unloadedgame') }}"
+                            class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/chess.jpg') }}"
+                                    alt="Chess" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Chess</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Chess</h4>
+                            <p>
+                                Engage in a battle of wits in this classic strategy game! Plan wisely, outsmart opponents, and protect your king. Whether a beginner or pro, Chess promises endless fun. ⚔️♟️👑
+                            </p>
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <label for="dislikes">What do you dislike most about the website?</label>
-        <textarea id="dislikes" name="dislikes" rows="3"></textarea>
+        <div class="card-wrapper" id="connect4">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='connect4') }}" class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/connect4.webp') }}"
+                                    alt="Connect4" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Connect4</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Connect4</h4>
+                            <p>
+                                Strategy meets excitement! Drop discs, aim for 4 in a row—horizontally, vertically, or diagonally! Compete with friends or challenge AI for endless fun! Who will connect first? 🎮
+                            </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <label for="navigation">How easy is it to navigate the website?</label>
-        <select id="navigation" name="navigation">
-          <option value="5">Very Easy</option>
-          <option value="4">Easy</option>
-          <option value="3">Neutral</option>
-          <option value="2">Difficult</option>
-          <option value="1">Very Difficult</option>
-        </select>
+        <div class="card-wrapper" id="darkwood_dash">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='darkwood_dash') }}"
+                            class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/darkwooddash.jpg') }}"
+                                    alt="Darkwood Dash" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Darkwood Dash</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Darkwood Dash</h4>
+                            <p>
+                                Venture into the shadows with Darkwood Dash! Evade traps, escape looming peril, and race for survival. With every step, the stakes rise — will you make it out alive? 🌲⚡🔥
+                            </p>                                    
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <label for="loading-speed">How would you rate the website's loading speed?</label>
-        <select id="loading-speed" name="loading-speed">
-          <option value="5">Very Fast</option>
-          <option value="4">Fast</option>
-          <option value="3">Average</option>
-          <option value="2">Slow</option>
-          <option value="1">Very Slow</option>
-        </select>
+        <div class="card-wrapper" id="flappy_bird">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='flappy_bird') }}" class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/flappybird.webp') }}"
+                                    alt="Flappy Bird" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Flappy Bird</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Flappy Bird</h4>
+                            <p>
+                                Tap to keep the bird afloat and navigate it through a series of tricky pipes! 🚧 A simple yet challenging game that tests your timing and focus. Can you achieve a high score?
+                            </p>
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <label for="technical-issues">Have you experienced any technical issues (e.g., crashes, errors)? If yes, please describe:</label>
-        <textarea id="technical-issues" name="technical-issues" rows="3"></textarea>
+        <div class="card-wrapper" id="ludo">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='unloadedgame') }}"
+                            class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/ludo.webp') }}"
+                                    alt="Ludo" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Ludo</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Ludo</h4>
+                            <p>
+                                Roll the dice and race your tokens home in this classic board game! 🏠 Strategize to block your opponents and claim victory. A family favorite for hours of fun and friendly competition! 🎉
+                            </p>
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <label for="mobile-friendly">Is the website mobile-friendly?</label>
-        <select id="mobile-friendly" name="mobile-friendly">
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-          <option value="not-sure">Not Sure</option>
-        </select>
+        <div class="card-wrapper" id="maze_game">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='mazegame') }}" class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/mazegame.jpg') }}"
+                                    alt="Maze Game" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Maze Game</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Maze Game</h4>
+                            <p>
+                                Navigate through challenging mazes filled with twists and turns! 🔍 Solve each puzzle to find the quickest way out. It's a test of patience, focus, and spatial skills. Will you escape? 🏁
+                            </p>
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <label for="website-suggestions">What improvements would you suggest for the website?</label>
-        <textarea id="website-suggestions" name="website-suggestions" rows="3"></textarea>
-      </form>
+        <div class="card-wrapper" id="memory_game">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='memory_game') }}" class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/memorygame.jpg') }}"
+                                    alt="Memory Game" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Memory Game</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Memory Game</h4>
+                            <p>
+                                Test your memory and matching skills in this fun game! 🃏 Flip cards to find pairs while improving focus and concentration. A simple yet engaging challenge for all ages! 🌟
+                            </p>
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrapper" id="minesweeper">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='minesweeper') }}" class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/minesweeper.jpg') }}"
+                                    alt="Minesweeper" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Minesweeper</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Minesweeper</h4>
+                            <p>
+                                Uncover tiles and avoid hidden mines in this classic logic puzzle! 🧩 Use clues to flag bombs and clear the field. One wrong move, and it's game over! 🚩 Can you clear it all?
+                            </p>
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrapper" id="pacman">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='pacman') }}" class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/pacman.jpg') }}"
+                                    alt="Pacman" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Pacman</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Pacman</h4>
+                            <p>
+                                Chomp your way through the maze, gobbling dots and dodging ghosts! 👻 Power up with pellets to chase your enemies. Fast-paced and endlessly fun, Pacman is a retro classic! 🕹️
+                            </p>
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrapper" id="snake_and_ladder">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='unloadedgame') }}"
+                            class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/snake&ladder.jpg') }}"
+                                    alt="Snake & Ladder" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Snake & Ladder</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Snake & Ladder</h4>
+                            <p>
+                                Climb ladders and avoid snakes in this exciting board game! 🪜 A perfect mix of luck and strategy, this family favorite promises surprises at every turn of the dice. 🐍 Can you reach the top?
+                            </p>
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrapper" id="snake_game">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='snake_game') }}" class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/snakegame.webp') }}"
+                                    alt="Snake Game" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Snake Game</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Snake Game</h4>
+                            <p>
+                                Guide your snake to eat food and grow even longer in this nostalgic game! 🍎 Avoid crashing into walls or yourself as you aim for the highest score. How long can you keep growing? 🚀
+                            </p>
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrapper" id="sudoku">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='sudoku') }}" class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/sudoku.webp') }}"
+                                    alt="Sudoku" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Sudoku</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Sudoku</h4>
+                            <p>
+                                Sharpen your mind with this popular number puzzle! 💡 Fill the grid with numbers 1-9 without repeating them in rows, columns, or squares. A perfect mix of logic and challenge awaits! 🔢
+                            </p>                                            
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrapper" id="tetris">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='tetris') }}" class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/tetris.jpg') }}"
+                                    alt="Tetris" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Tetris</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Tetris</h4>
+                            <p>
+                                Fit falling blocks to create lines and score big in this classic game! 🎮 Use quick thinking and spatial skills to keep the board clear. Can you beat the speed as the game progresses? 🏆
+                            </p>
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrapper" id="tic_tac_toe">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='tictactoe') }}" class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/tictactoe.jpg') }}"
+                                    alt="Tic Tac Toe" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Tic Tac Toe</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Tic Tac Toe</h4>
+                            <p>
+                                Battle in this two-player classic where strategy meets fun! Align three of your marks in a row to win. Simple yet addictive, this game is perfect for friendly challenges. 🤝 Who will claim victory?
+                            </p>
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrapper" id="towerblocks">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='tower_blocks') }}"
+                            class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/towerblocks.webp') }}"
+                                    alt="Tower Blocks" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Tower Blocks</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Tower Blocks</h4>
+                            <p>
+                                Stack blocks as high as you can without toppling the tower! 🏢 Test your timing, precision, and balance in this fun and engaging game. Build the tallest structure and aim for the skies! 🌟
+                            </p>
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrapper" id="whack_a_mole">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='whack_a_mole') }}"
+                            class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/whackamole.jpg') }}"
+                                    alt="Whack A Mole" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Whack-A-Mole</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Whack-A-Mole</h4>
+                            <p>
+                                Stay alert and smash those pesky moles as they pop up! 🔨 Quick reflexes, sharp focus, and a keen eye are your best tools in this fast-paced arcade game. How many can you hit? 🌟
+                            </p>                                                                                    
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrapper" id="trial">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='trail') }}" class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/image.jpg') }}"
+                                    alt="Trial" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Trial</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Trial</h3>
+                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                    to align their marks in a grid.</p>
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrapper" id="trial2">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <!-- Front Side -->
+                    <div class="flip-card-front" style="margin: 0px;">
+                        <a href="{{ url_for('show_page', page_name='unloadedgame') }}"
+                            class="card-link">
+                            <div class="card-internal">
+                                <img src="{{ url_for('static', filename='images/chess.jpg') }}"
+                                    alt="Chess" class="card-image" loading="lazy">
+                                <div class="card-content">
+                                    <h3 class="card-title">Trial 2</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                    <!-- Back Side -->
+                    <div class="flip-card-back">
+                        <div class="card-description">
+                            <h4>About Trial</h3>
+                                <p>Tic Tac Toe is a fun and strategic two-player game where players aim
+                                    to align their marks in a grid.</p>
+                        </div>
+                        <button class="flip-btn" onclick="flipCard(this)">&#8635;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- Game-Specific Feedback -->
-    <div class="feedback-section">
-      <h2>Game-Specific Feedback</h2>
-      <form>
-        <label for="game-rating">How enjoyable are the games?</label>
-        <select id="game-rating" name="game-rating">
-          <option value="5">Very Enjoyable</option>
-          <option value="4">Enjoyable</option>
-          <option value="3">Neutral</option>
-          <option value="2">Not Enjoyable</option>
-          <option value="1">Very Boring</option>
-        </select>
-
-        <label for="game-issues">Have you experienced any issues while playing? If yes, please specify the game and describe the issue:</label>
-        <textarea id="game-issues" name="game-issues" rows="3"></textarea>
-
-        <label for="game-performance">How would you rate the performance of the games (e.g., loading speed, responsiveness)?</label>
-        <select id="game-performance" name="game-performance">
-          <option value="5">Excellent</option>
-          <option value="4">Good</option>
-          <option value="3">Average</option>
-          <option value="2">Poor</option>
-          <option value="1">Very Poor</option>
-        </select>
-
-        <label for="game-instructions">Are the game instructions clear and easy to understand?</label>
-        ```html
-        <select id="game-instructions" name="game-instructions">
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-          <option value="not-sure">Not Sure</option>
-        </select>
-
-        <label for="game-suggestions">Suggestions for game improvements:</label>
-        <textarea id="game-suggestions" name="game-suggestions" rows="3"></textarea>
-      </form>
     </div>
+</div>
 
-    <!-- Additional Feedback -->
-    <div class="feedback-section">
-      <h2>Additional Feedback</h2>
-      <form>
-        <label for="comments">Any other comments or suggestions?</label>
-        <textarea id="comments" name="comments" rows="3"></textarea>
-      </form>
-    </div>
 
-    <!-- Submit Button -->
-    <button type="submit" class="submit-btn">Submit Feedback</button>
-  </div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const gameCont = document.querySelector('.game-cont');
+    const cardWidth = gameCont.firstElementChild.offsetWidth; // Get width of one card
+    const scrollStep = cardWidth + 20; // Add margin (adjust if needed)
+    
+    let currentScroll = 0; // Current scroll position
+
+    // Clone the content for seamless looping
+    const cloneCards = () => {
+        const cards = Array.from(gameCont.children);
+        cards.forEach(card => {
+            const clone = card.cloneNode(true);
+            gameCont.appendChild(clone);
+        });
+    };
+    cloneCards();
+
+    // Handle mouse wheel scrolling
+    document.querySelector('.game-scroll').addEventListener('wheel', (event) => {
+        event.preventDefault(); // Prevent vertical scrolling
+        const scrollDirection = event.deltaY > 0 ? 1 : -1; // Check scroll direction
+
+        // Calculate the new scroll position
+        currentScroll += scrollStep * scrollDirection;
+
+        // Handle infinite looping
+        if (currentScroll < 0) {
+            currentScroll += gameCont.scrollWidth / 2; // Jump to the end
+        } else if (currentScroll >= gameCont.scrollWidth / 2) {
+            currentScroll -= gameCont.scrollWidth / 2; // Jump to the start
+        }
+
+        // Apply the new scroll position
+        gameCont.style.transform = `translateX(${-currentScroll}px)`;
+    });
+});
+
+</script>
 </body>
 </html>

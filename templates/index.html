@@ -20,25 +20,24 @@
         <div class="home-main-container" style="display: flex;">
             <div class="sidebar-games">
                 <ul>
-                    <li><a href="#tic_tac_toe">Tic Tac Toe</a></li>
-                    <li><a href="#chess">Chess</a></li>
-                    <li><a href="#memory_game">Memory Game</a></li>
-                    <li><a href="#snake_and_ladder">Snake & Ladder</a></li>
-                    <li><a href="#ludo">Ludo</a></li>
-                    <li><a href="#maze_game">Maze Game</a></li>
-                    <li><a href="#balloon_popper">Balloon Popper</a></li>
-                    <li><a href="#minesweeper">Minesweeper</a></li>
-                    <li><a href="#pacman">Pacman</a></li>
-                    <li><a href="#whack_a_mole">Whack-A-Mole</a></li>
-                    <li><a href="#tetris">Tetris</a></li>
-                    <li><a href="#bubble_shooter">Bubble Shooter</a></li>
-                    <li><a href="#snake_game">Snake Game</a></li>
-                    <li><a href="">CardTitle</a></li>
-                    <li><a href="">CardTitle</a></li>
-                    <li><a href="">CardTitle</a></li>
-                    <li><a href="">CardTitle</a></li>
-                    <li><a href="">CardTitle</a></li>
-                    <li><a href="">CardTitle</a></li>
+                    <li><a href="#balloon_popper">Balloon Popper</a>  <a href="{{ url_for('show_page', page_name='balloon_popper') }}" class="hidden-play">Play</a></li>
+                    <li><a href="#bubble_shooter">Bubble Shooter</a>  <a href="{{ url_for('show_page', page_name='bubble_shooter') }}" class="hidden-play">Play</a></li>
+                    <li><a href="#chess">Chess</a> <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="hidden-play">Play</a></li>
+                    <li><a href="#connect4">Connect4</a> <a href="{{ url_for('show_page', page_name='connect4') }}" class="hidden-play">Play</a></li>
+                    <li><a href="#darkwood_dash">Darkwood Dash</a> <a href="{{ url_for('show_page', page_name='darkwood_dash') }}" class="hidden-play">Play</a></li>
+                    <li><a href="#ludo">Ludo</a>  <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="hidden-play">Play</a></li>
+                    <li><a href="#flappy_bird">Flappy Bird</a>  <a href="{{ url_for('show_page', page_name='flappy_bird') }}" class="hidden-play">Play</a></li>
+                    <li><a href="#maze_game">Maze Game</a>  <a href="{{ url_for('show_page', page_name='mazegame') }}" class="hidden-play">Play</a></li>
+                    <li><a href="#memory_game">Memory Game</a>  <a href="{{ url_for('show_page', page_name='memory_game') }}" class="hidden-play">Play</a></li>
+                    <li><a href="#minesweeper">Minesweeper</a>  <a href="{{ url_for('show_page', page_name='minesweeper') }}" class="hidden-play">Play</a></li>
+                    <li><a href="#pacman">Pacman</a>  <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="hidden-play">Play</a></li>
+                    <li><a href="#snake_and_ladder">Snake & Ladder</a>  <a href="{{ url_for('show_page', page_name='unloadedgame') }}" class="hidden-play">Play</a></li>
+                    <li><a href="#snake_game">Snake Game</a>  <a href="{{ url_for('show_page', page_name='snake_game') }}" class="hidden-play">Play</a></li>
+                    <li><a href="#sudoku">Sudoku</a>  <a href="{{ url_for('show_page', page_name='sudoku') }}" class="hidden-play">Play</a></li>
+                    <li><a href="#tetris">Tetris</a>  <a href="{{ url_for('show_page', page_name='tetris') }}" class="hidden-play">Play</a></li>
+                    <li><a href="#tic_tac_toe">Tic Tac Toe</a> <a href="{{ url_for('show_page', page_name='tictactoe') }}" class="hidden-play">Play</a></li>
+                    <li><a href="#tower_blocks">Tower Blocks</a> <a href="{{ url_for('show_page', page_name='tower_blocks') }}" class="hidden-play">Play</a></li>
+                    <li><a href="#whack_a_mole">Whack-A-Mole</a>  <a href="{{ url_for('show_page', page_name='whack_a_mole') }}" class="hidden-play">Play</a></li>
                 </ul>
             </div>
             <div class="game-classifier">

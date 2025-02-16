@@ -8,11 +8,13 @@ body {
     margin: 0; /* Remove default margin */
     padding: 0; /* Remove default padding */
     height: 100vh; /* Set the height of the body to the full height of the viewport */
+    width: 100vw;
 }
 
 main {
     height: calc(100vh - 50px); /* Set the height of the main content area */
     padding-top: 50px;
+    overflow: hidden;
 }
 
 .home-main-container {
@@ -31,12 +33,31 @@ main {
 
 .sidebar-games > ul > li {
     padding: 5px;
+    position: relative;
 }
+
 
 .sidebar-games > ul > li > a {
     color: red;
     text-decoration: none;
 }
+
+
+/* SideBar PLay Button */
+.hidden-play {
+    background-color: #007bff;
+    padding: 3px 8px;
+    border-radius: 5px;
+    display: none; /* Initially hide the "play" link */
+    position: absolute;
+    top: 0px;
+    right: 5px;
+}
+
+.sidebar-games ul li:hover .hidden-play {
+    display: inline; /* Show the "play" link on hover */
+}
+
 
 /* Navigation bar background */
 .nav-bg-color {
@@ -136,7 +157,7 @@ nav {
     margin: 6px;
     border: 2px solid #ddd;
     overflow: hidden;
-    background-color: purple;
+    background-color: black;
     border-radius: 8px;
 }
 
@@ -495,3 +516,4 @@ button:hover {
     margin: 0px;
     background-color: red;
 } */
+
